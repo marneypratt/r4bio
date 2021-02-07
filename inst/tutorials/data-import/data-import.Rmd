@@ -224,7 +224,7 @@ Use the `read_csv()` function from the `readr` package along with the `here()` f
 
 ```{r import2, exercise=TRUE, message=FALSE, exercise.setup = "readr"}
 
-hemlocks <- read_csv(here("data/hemlock_diam.csv"))
+hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"))
 
 ```
 
@@ -252,7 +252,7 @@ Use the code chunk below to play around with any of the functions we have learne
 
 library(readr)
 library(here)
-hemlocks <- read_csv(here("data/hemlock_diam.csv"))
+hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"))
 
 ```
 
@@ -307,7 +307,7 @@ We can set the correct data type for a variable when we import using `read_csv()
 
 ```{r import3, exercise=TRUE, message=FALSE}
 
-hemlocks <- read_csv(here("data/hemlock_diam.csv"),
+hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"),
                      col_types = cols(date = col_date(format = "%m/%d/%Y")))
 
 ```
@@ -334,7 +334,7 @@ Tell R the column called "location" is a factor and then look at the structure w
 
 ```{r import4, exercise=TRUE, message=FALSE}
 
-hemlocks <- read_csv(here("data/hemlock_diam.csv"),
+hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"),
                      col_types = cols(
                        location = col_factor(), 
                        date = col_date(format = "%m/%d/%Y")))
@@ -355,7 +355,7 @@ Now that you have successfully imported a data file into R, you can use it to vi
 ```{r treesize, echo=FALSE, message=FALSE}
 
 
-hemlocks <- read_csv(here("data/hemlock_diam.csv"),
+hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"),
                      col_types = cols(
                        location = col_factor(), 
                        date = col_date(format = "%m/%d/%Y")))
