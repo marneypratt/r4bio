@@ -42,7 +42,7 @@ Type the code below in the console (bottom left pane in RStudio) and then press 
 
 (replace "basics" with the name of other tutorials as needed)
 
-This should open the tutorial in a new browser window.  To stop the tutorial, click the stop sign in the upper right of the Rstudio console pane (lower left RStudio pane)
+This should open the tutorial in a new browser window.  To stop the tutorial, click the stop sign in the upper right of the Rstudio console (lower left RStudio pane)
 
 **OR**
 
