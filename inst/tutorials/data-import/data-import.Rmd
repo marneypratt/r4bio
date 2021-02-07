@@ -252,7 +252,7 @@ Use the code chunk below to play around with any of the functions we have learne
 
 library(readr)
 library(here)
-hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"))
+hemlocks <- read_csv(here("extdata/hemlock_diam.csv"))
 
 ```
 
