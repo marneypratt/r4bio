@@ -307,7 +307,7 @@ We can set the correct data type for a variable when we import using `read_csv()
 
 ```{r import3, exercise=TRUE, message=FALSE}
 
-hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"),
+hemlocks <- read_csv(here("inst/extdata/hemlock_diam.csv"),
                      col_types = cols(date = col_date(format = "%m/%d/%Y")))
 
 ```
@@ -334,7 +334,7 @@ Tell R the column called "location" is a factor and then look at the structure w
 
 ```{r import4, exercise=TRUE, message=FALSE}
 
-hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"),
+hemlocks <- read_csv(here("inst/extdata/hemlock_diam.csv"),
                      col_types = cols(
                        location = col_factor(), 
                        date = col_date(format = "%m/%d/%Y")))
@@ -355,7 +355,7 @@ Now that you have successfully imported a data file into R, you can use it to vi
 ```{r treesize, echo=FALSE, message=FALSE}
 
 
-hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"),
+hemlocks <- read_csv(here("inst/extdata/hemlock_diam.csv"),
                      col_types = cols(
                        location = col_factor(), 
                        date = col_date(format = "%m/%d/%Y")))
