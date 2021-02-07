@@ -40,7 +40,7 @@ Type the code below in the console (bottom left pane in RStudio) and then press 
 
 `learnr::run_tutorial("basics", "r4bio")`
 
-(replace "basic" with the name of other tutorials as needed)
+(replace "basics" with the name of other tutorials as needed)
 
 This should open the tutorial in a new browser window.  To stop the tutorial, click the stop sign in the upper right of the Rstudio console pane (lower left RStudio pane)
 
@@ -57,7 +57,7 @@ To stop the tutorial in the Tutorial pane, click the stop sign in the twop left 
 
 Here is a list of the tutorials in the **Intro to R for Biology** course found in the `r4bio` package:
 
-1. **Basics** ("basic")
+1. **Basics** ("basics")
 
 * Why looking at data visually can be useful
 * how to install and load packages
