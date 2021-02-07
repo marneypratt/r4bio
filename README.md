@@ -20,7 +20,7 @@ If you already have R and RStudio installed on your computer, then please update
 
 Before you can use this series of tutorials, you must install some packages in R.  See the instructions for [package installation from Modern Dive](https://moderndive.com/1-getting-started.html#package-installation) or 
 
-Install or update the following packages by copying the code below, pasting in the RStudio console, then clicking enter:
+Install or update the following packages by copying the code below, pasting in the console (bottom left pane in RStudio), then clicking enter:
 
 ```
 install.packages("tidyverse")   
@@ -30,22 +30,32 @@ install.packages("learnr")
 install.packages("devtools")
 devtools::install_github('rstudio/htmltools')
 devtools::install_github("rstudio-education/gradethis", force = TRUE)
+devtools::install_github("marneypratt/r4bio")
 
 ```
+
+### Launch a lesson:
+
+In the console (bottom left pane in RStudio) type: `learnr::run_tutorial("basic", "r4bio")` and Enter
+(replace "basic" with the name of other tutorials as needed)
+
+OR
+
+Go to the **Tutorial** pane in the upper right of RStudio and scroll down to find the tutorial you want to run and then click **Start Tutorial**
 
 
 ## Tutorials
 
-Here is a list of the tutorials in the `Intro to R for Biology` course which can be installed using the `r4bio` package:
+Here is a list of the tutorials in the **Intro to R for Biology** course found in the `r4bio` package:
 
-1. **Basics**
+1. **Basics** ("basic")
 
 * Why looking at data visually can be useful
 * how to install and load packages
 * Understand what a function is and how to use a function's help page
 * Use the `head()` function to look at data frames   
 
-2. **Getting Data into R**
+2. **Getting Data into R** ("data-import")
 
 * Learn about objects and data types in R
 * Use several functions to help investigate the structure of a data frame
