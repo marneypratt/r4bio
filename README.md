@@ -34,17 +34,23 @@ devtools::install_github("marneypratt/r4bio")
 
 ```
 
-## Launch a lesson:
+## Launch a Tutorial:
 
 Type the code below in the console (bottom left pane in RStudio) and then press Enter:
 
-`learnr::run_tutorial("basic", "r4bio")`
+`learnr::run_tutorial("basics", "r4bio")`
 
 (replace "basic" with the name of other tutorials as needed)
 
-OR
+This should open the tutorial in a new browser window.  To stop the tutorial, click the stop sign in the upper right of the Rstudio console pane (lower left RStudio pane)
 
-Go to the **Tutorial** pane in the upper right of RStudio and scroll down to find the tutorial you want to run and then click **Start Tutorial**
+**OR**
+
+Go to the **Tutorial** pane in the upper right of RStudio and scroll down to find the tutorial you want to run and then click **Start Tutorial**.
+
+Expand the Tutorial pane by dragging its edges or click the little pop-out window icon next to the Home icon in the upper left of the Tutorial pane.
+
+To stop the tutorial in the Tutorial pane, click the stop sign in the twop left of the Tutorial window
 
 
 ## Tutorials
