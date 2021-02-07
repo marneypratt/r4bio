@@ -224,7 +224,7 @@ Use the `read_csv()` function from the `readr` package along with the `here()` f
 
 ```{r import2, exercise=TRUE, message=FALSE, exercise.setup = "readr"}
 
-hemlocks <- read_csv(here("inst/tutorials/data-import/www/hemlock_diam.csv"))
+hemlocks <- read_csv(here("extdata/hemlock_diam.csv"))
 
 ```
 
