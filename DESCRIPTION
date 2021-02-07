@@ -8,7 +8,7 @@ Authors@R:
            email = "mcpratt@smith.edu")
 Description: r4bio is a package containing the Intro to R for Biology learnr tutorials.    
     These interactive tutorials are intented to help users learn R in a biology context.
-License: `use_mit_license()`
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -21,5 +21,7 @@ Imports:
     ggbeeswarm,
     learnr,
     gradethis (>= 0.2.0.9001)
-Remotes:  
+Remotes: 
     rstudio-education/gradethis
+Depends: 
+    R (>= 2.10)
