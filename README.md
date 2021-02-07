@@ -34,9 +34,12 @@ devtools::install_github("marneypratt/r4bio")
 
 ```
 
-### Launch a lesson:
+## Launch a lesson:
 
-In the console (bottom left pane in RStudio) type: `learnr::run_tutorial("basic", "r4bio")` and Enter
+Type the code below in the console (bottom left pane in RStudio) and then press Enter:
+
+`learnr::run_tutorial("basic", "r4bio")`
+
 (replace "basic" with the name of other tutorials as needed)
 
 OR
