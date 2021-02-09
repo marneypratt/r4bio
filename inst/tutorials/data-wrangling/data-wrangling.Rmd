@@ -306,6 +306,40 @@ You should now see a new column added to the dataset called radius with values t
 `dplyr` has lots of other useful functions. We will explore a few more in the "Descriptive Statistics" tutorial. 
 
 
+## Changing Data Types
+
+`mutate()` can also make changes to your existing columns if you give the new column the same name as the old column (the new column **replaces** the old column).  
+
+Remember when we imported a csv file in the "Getting Data into R" tutorial we could use the `col_types()` function from `readr` to determine the data type of different columns. But what if we want to change the data type of a column after you have already imported something? You can do that with `mutate()`.
+
+The general form we use is `mutate(mydata, var_name = as.datatype(var_name))`
+Where mydata is the name of the data frame object, var_name is the name of the variable, and as.datatype is one of the functions that changes the data type (as.numeric, as.factor, as.character, as.Date, etc)
+
+Let's pretend we want to change the location variable from the factor data type to character. We can do that with this code:
+
+```{r data_types, exercise=TRUE}
+
+mutate(hemlocks, location = as.character(location))
+
+```
+
+Notice that the location column now has <chr> (=character) as the data type.
+
+## Rename
+
+Sometimes we need to rename a column in our data frame.  This often comes up when trying to merge two datasets when they have slightly different names (Date vs date can even cause problems).  or maybe we just get tired of typing long variable names.  To changet the name of a column, we can just use the `rename()` function in `dplyr` with the general form:
+
+`rename(mydata, new_name = old_name)`
+
+Run the code below for an example of how we could change the variable size.group to just size
+
+```{r rename, exercise=TRUE}
+
+rename(hemlocks, size = size.group)
+
+```
+
+
 ## Pipes
 
 Now that we are seeing more and more useful functions to help us manipulate our data, it may be clear that we might want to string together a bunch of different functions on the same set of data.
