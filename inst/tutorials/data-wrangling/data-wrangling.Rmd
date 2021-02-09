@@ -323,7 +323,7 @@ mutate(hemlocks, location = as.character(location))
 
 ```
 
-Notice that the location column now has <chr> (=character) as the data type.
+Notice that the location column now has character as the data type.
 
 ## Rename
 
