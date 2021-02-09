@@ -37,7 +37,7 @@ In this lesson, we will learn some basic ways to manipulate a data frame (often 
 
 ### Learning goals
 
-* Use the `dplyr` package to filter, sort, manipulate data
+* Use the `dplyr` package to filter, sort, and manipulate data
 * How to find and remove missing data
 * Learn about the pipe operator ` %>% `
 

@@ -2,7 +2,7 @@
 
 ### by Marney Pratt
 
-### Last updated on February 6, 2021
+### Last updated on February 9, 2021
 
 ## Why use learnr to learn R?
 
@@ -70,5 +70,11 @@ Here is a list of the tutorials in the **Intro to R for Biology** course found i
 * Use several functions to help investigate the structure of a data frame
 * Understand what tidy data is
 * Practice importing a csv file
+
+3. **Working with Data** ("data-wrangling")
+
+* Use the `dplyr` package to filter, sort, and manipulate data
+* How to find and remove missing data
+* Learn about the pipe operator ` %>% `
 
 
