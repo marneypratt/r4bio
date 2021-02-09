@@ -18,9 +18,9 @@ If you already have R and RStudio installed on your computer, then please update
 
 ## Install/Update Packages
 
-Before you can use this series of tutorials, you must install some packages in R.  See the instructions for [package installation from Modern Dive](https://moderndive.com/1-getting-started.html#package-installation) or 
+Before you can use this series of tutorials, you must install some packages in R.  See the instructions for [package installation from Modern Dive](https://moderndive.com/1-getting-started.html#package-installation) if you have never installed R packages before.
 
-Install or update the following packages by copying the code below, pasting in the console (bottom left pane in RStudio), then clicking enter:
+You can install or update the following packages by copying the code below, pasting in the console (bottom left pane in RStudio), then pressing enter:
 
 ```
 install.packages("tidyverse")   

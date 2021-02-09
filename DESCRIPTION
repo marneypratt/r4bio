@@ -1,4 +1,5 @@
 Package: r4bio
+Type: Package
 Title: Intro to R for Biology
 Version: 0.0.0.9000
 Authors@R: 
@@ -9,6 +10,8 @@ Authors@R:
 Description: r4bio is a package containing the Intro to R for Biology learnr tutorials.    
     These interactive tutorials are intented to help users learn R in a biology context.
 License: MIT + file LICENSE
+URL: https://github.com/marneypratt/r4bio
+BugReports: https://github.com/marneypratt/r4bio/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -21,7 +24,7 @@ Imports:
     ggbeeswarm,
     learnr,
     gradethis (>= 0.2.0.9001)
-Remotes: 
-    rstudio-education/gradethis
+Remotes:  
+    rstudio-education/gradethis,
 Depends: 
     R (>= 2.10)
