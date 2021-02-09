@@ -218,13 +218,15 @@ library(here)
 
 ```
 
-Use the `read_csv()` function from the `readr` package along with the `here()` function from the `here` package to load the "hemlocks_diam.csv" file and assign it to an object named hemlocks by running the code below.
+Smith College students in the Bio 131 course (Research in Biodiversity, Ecology, and Conservation) collected data on the diameter and height of Eastern hemlock trees (*Tsuga canadensis*) as well as noted whether each tree was infested with one of two invasive insects.
+
+Use the `read_csv()` function from the `readr` package along with the `here()` function from the `here` package to load the "hemlocks_diam.csv" file and assign it to an object named hemlock by running the code below.
 
 
 
 ```{r import2, exercise=TRUE, message=FALSE, exercise.setup = "readr"}
 
-hemlocks <- read_csv(here("extdata/hemlock_diam.csv"))
+hemlock <- read_csv(here("extdata/hemlock_diam.csv"))
 
 ```
 
@@ -234,7 +236,7 @@ Think of the assignment operator as an arrow. You are assigning the result of th
 
 We import the csv file into R with `read_csv` (and using `here` to help us simplify file paths), but in order to do other things with the data we imported we have to give it a name by using the assignment operator.
 
-Notice that nothing printed out as a result of the code we ran above.  To look at the `hemlocks` object that we just created by importing the data, we have to use other functions to look at the structure of the data. We will do this in the next section
+Notice that nothing printed out as a result of the code we ran above.  To look at the `hemlock` object that we just created by importing the data, we have to use other functions to look at the structure of the data. We will do this in the next section
 
 
 Here are some resources to help you learn more
@@ -244,21 +246,21 @@ Here are some resources to help you learn more
 * [readr package](https://readr.tidyverse.org/)
 
 
-## Hemlocks dataset
+## Hemlock dataset
 
-Use the code chunk below to play around with any of the functions we have learned about to look at the structure of the data we imported and called `hemlocks` (examples include `dim()`, `names()`, `head()`, `str()`) and then answer the questions below.
+Use the code chunk below to play around with any of the functions we have learned about to look at the structure of the data we imported and called `hemlock` (examples include `dim()`, `names()`, `head()`, `str()`) and then answer the questions below.
 
-```{r hemlocks, include=FALSE, message=FALSE}
+```{r hemlock, include=FALSE, message=FALSE}
 
 library(readr)
 library(here)
-hemlocks <- read_csv(here("extdata/hemlock_diam.csv"))
+hemlock <- read_csv(here("extdata/hemlock_diam.csv"))
 
 ```
 
 
 
-```{r play, exercise=TRUE, exercise.setup = "hemlocks"}
+```{r play, exercise=TRUE, exercise.setup = "hemlock"}
 
 
 
@@ -269,29 +271,29 @@ hemlocks <- read_csv(here("extdata/hemlock_diam.csv"))
 ```{r hemlocks_quiz}
 
 quiz(
-  question("How many rows are there in the hemlocks dataset?",
+  question("How many rows are there in the hemlock dataset?",
            answer("7"),
            answer("297"),
            answer("298", correct=TRUE, message="You got it!"),
            answer("4"),
-           incorrect = "Don't forget to use the code chunk above to explore the structure of the hemlocks dataset",
+           incorrect = "Don't forget to use the code chunk above to explore the structure of the hemlock dataset",
            allow_retry = TRUE,
            random_answer_order = TRUE),
-  question("How many columns are there in the hemlocks dataset?",
+  question("How many columns are there in the hemlock dataset?",
            answer("7", correct=TRUE),
            answer("297"),
            answer("298"),
            answer("4"),
-           incorrect = "Don't forget to use the code chunk above to explore the structure of the hemlocks dataset",
+           incorrect = "Don't forget to use the code chunk above to explore the structure of the hemlock dataset",
            allow_retry = TRUE,
            random_answer_order = TRUE),
-  question("What type is the **date** variable in the hemlocks dataset?",
+  question("What type is the **date** variable in the hemlock dataset?",
            answer("number (=num)"),
            answer("factor (=Factor)"),
            answer("character (=chr)", correct=TRUE, message="Excellent work!"),
            answer("date (=date)"),
            answer("interger (=int)"),
-           incorrect = "try head(hemlocks) or str(hemlocks) in the code chunk above",
+           incorrect = "try head(hemlock) or str(hemlock) in the code chunk above",
            allow_retry = TRUE,
            random_answer_order = TRUE)
 )
@@ -307,13 +309,13 @@ We can set the correct data type for a variable when we import using `read_csv()
 
 ```{r import3, exercise=TRUE, message=FALSE}
 
-hemlocks <- read_csv(here("extdata/hemlock_diam.csv"),
+hemlock <- read_csv(here("extdata/hemlock_diam.csv"),
                      col_types = cols(date = col_date(format = "%m/%d/%Y")))
 
 ```
 
 
-Look at the structure of the hemlocks dataset again by using the code chunk below 
+Look at the structure of the hemlock dataset again by using the code chunk below 
 
 ```{r play2, exercise=TRUE, exercise.setup = "import3"}
 
@@ -328,18 +330,18 @@ The date column should now say it is a Date with values that look like "2016-03-
 
 ## 
 
-You may have noticed that all the columns with letters or words in them in the `hemlocks` dataset are imported as character strings.  This may be fine, but there are also times when we want a variable to be a factor when we want to use that variable for particular kinds of analysis or graphs.
+You may have noticed that all the columns with letters or words in them in the `hemlock` dataset are imported as character strings.  This may be fine, but there are also times when we want a variable to be a factor when we want to use that variable for particular kinds of analysis or graphs.
 
 Tell R the column called "location" is a factor and then look at the structure with `str()` by running the code below
 
 ```{r import4, exercise=TRUE, message=FALSE}
 
-hemlocks <- read_csv(here("extdata/hemlock_diam.csv"),
+hemlock <- read_csv(here("extdata/hemlock_diam.csv"),
                      col_types = cols(
                        location = col_factor(), 
                        date = col_date(format = "%m/%d/%Y")))
 
-str(hemlocks)
+str(hemlock)
 
 ```
 
@@ -355,12 +357,12 @@ Now that you have successfully imported a data file into R, you can use it to vi
 ```{r treesize, echo=FALSE, message=FALSE}
 
 
-hemlocks <- read_csv(here("extdata/hemlock_diam.csv"),
+hemlock <- read_csv(here("extdata/hemlock_diam.csv"),
                      col_types = cols(
                        location = col_factor(), 
                        date = col_date(format = "%m/%d/%Y")))
 
-hemlocks %>% 
+hemlock %>% 
   filter(!is.na(height)) %>% 
     ggplot(aes(x=diameter, y=height, color=location)) +
   geom_point(size=2, alpha=0.75) +
