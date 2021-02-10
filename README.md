@@ -2,7 +2,7 @@
 
 ### by Marney Pratt
 
-### Last updated on February 9, 2021
+### Last updated on February 10, 2021
 
 ## Why use learnr to learn R?
 
@@ -77,4 +77,8 @@ Here is a list of the tutorials in the **Intro to R for Biology** course found i
 * How to find and remove missing data
 * Learn about the pipe operator ` %>% `
 
+4. **Descriptive Statistics** ("descriptive-stats")
+
+* Learn some basic concepts about descriptive statistics
+* Use the `group_by()` and `summarize()` functions from `dplyr` to calculate descriptive statistics
 
