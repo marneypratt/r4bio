@@ -365,7 +365,7 @@ knitr::include_graphics("images/Rrollercoaster.png")
 
 Artwork by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
-## References
+## Resources
 
 
 * [Chapter 1 Getting Started with Data in R](https://moderndive.com/1-getting-started.html) from the Modern Dive online textbook to get a basic introduction.
