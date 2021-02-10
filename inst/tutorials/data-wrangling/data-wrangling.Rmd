@@ -474,7 +474,7 @@ knitr::include_graphics("images/data_cowboy.png")
  
 Artwork by [Allison Horst](https://github.com/allisonhorst/stats-illustrations) 
  
-## References
+## Resources
 
 * [Wrangling penguins: some basic data wrangling in R with dplyr](https://allisonhorst.shinyapps.io/dplyr-learnr/#section-welcome): a longer learnr tutorial with more functions from `dplyr`, lots of examples, and more practice
 * [Data Transformation with dplyr Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf): overview of how to use `dplyr`
