@@ -381,7 +381,7 @@ hemlock %>%
 If you complete the remaining lessons in this course, you will be able to make graphs like this too.  Keep up the good work and come back to refresh these data importing skills anytime.
 
 
-## References
+## Resources
 
 
 ### Some useful functions in R to look at the structure of data frames
