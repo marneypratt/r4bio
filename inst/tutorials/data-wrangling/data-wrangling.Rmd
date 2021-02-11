@@ -16,7 +16,6 @@ description: >
 library(learnr)
 library(gradethis)
 library(dplyr)
-library(here)
 library(r4bio)
 
 #sets gradethis as exercise checker
