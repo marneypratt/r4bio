@@ -39,6 +39,16 @@ To complete this tutorial successfully, you will need to understand variable typ
 
 As a reminder, the hemlock data were collected by Smith College Bio 131 students. They measured the diameter and height for eastern hemlock trees at 4 locations in Western Massachusetts. You can get more information by searching for `hemlocks` in the help tab in RStudio or typing `?hemlocks` in the RStudio Console.
 
+### Learning goals
+
+* Use the `ggplot2` package to make
+    + scatterplots
+    + histograms
+    + box plots
+    + dot plots
+* Learn how to do a log transformation of axes and data
+* Learn some best practices in basic data visualization
+
 
 ## Grammar of Graphics
 
