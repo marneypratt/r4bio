@@ -17,7 +17,6 @@ library(learnr)
 library(gradethis)
 library(dplyr)
 library(ggplot2)
-library(here)
 library(r4bio)
 
 #sets gradethis as exercise checker
@@ -42,7 +41,7 @@ This tutorial assumes you understand how to use the pipe operator `%>%` and some
 
 Like many of the tutorials in **Intro to R for Biology**, we will use the hemlocks dataset from the `r4bio` package. 
 
-As a reminder, the hemlocks data were collected by Smith College Bio 131 students. They measured the diameter and height for eastern hemlock trees at 4 locations in Western Massachusetts. You can get more information by searching for `hemlocks` in the help tab in RStudio or typing `?hemlocks` in the RStudio Console.
+As a reminder, the hemlock data were collected by Smith College Bio 131 students. They measured the diameter and height for eastern hemlock trees at 4 locations in Western Massachusetts. You can get more information by searching for `hemlocks` in the help tab in RStudio or typing `?hemlocks` in the RStudio Console.
 
 ### Learning goals
 
