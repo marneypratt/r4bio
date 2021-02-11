@@ -82,3 +82,13 @@ Here is a list of the tutorials in the **Intro to R for Biology** course found i
 * Learn some basic concepts about descriptive statistics
 * Use the `group_by()` and `summarize()` functions from `dplyr` to calculate descriptive statistics
 
+5. **Graphing with ggplot** ("ggplot")
+
+* Use the `ggplot2` package to make
+    + scatterplots
+    + histograms
+    + box plots
+    + dot plots
+* Learn how to do a log transformation of axes and data
+* Learn some best practices in basic data visualization
+
