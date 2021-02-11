@@ -185,14 +185,23 @@ Alternatively, you can also type the name of the function with a question mark i
 knitr::include_graphics("images/sqrtHelp2.png")
 ```
 
-For now, let's just click on this [link to open the sqrt() help documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html) in a new browser window and keep this window open for the time being.
+For now, let's just click on this [link to open the sqrt() help documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html) 
+
+**NOTE**: to open a link in a new tab:
+
+* Hold down the COMMAND key and then click the link on a Mac
+* Hold down the CTRL key and then click the link on Windows & Linux
 
 
 ## Understanding Help Documents
 
-Note that the help document shows the name of the help page and the package it is from at the top left corner of the help page (the package name is in the {} brackets).
+The help document shows the name of the help page and the package it is from at the top left corner of the help page (the package name is in the {} brackets).
 
-The sqrt() function is from a help page called Miscellaneous Mathematical Functions and is abbreviated as MathFun in the top left corner.
+```{r sqrtHelp2, out.width = "90%"}
+knitr::include_graphics("images/sqrtHelp3.png")
+```
+
+The sqrt() function is from a help page called **Miscellaneous Mathematical Functions** and is abbreviated as **MathFun** in the top left corner.
 
 The sqrt() function is part of base R so the package it is from is shown as {base}
 
