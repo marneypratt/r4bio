@@ -197,7 +197,7 @@ For now, let's just click on this [link to open the sqrt() help documentation](h
 
 The help document shows the name of the help page and the package it is from at the top left corner of the help page (the package name is in the {} brackets).
 
-```{r sqrtHelp2, out.width = "90%"}
+```{r sqrtHelp3, out.width = "90%"}
 knitr::include_graphics("images/sqrtHelp3.png")
 ```
 
