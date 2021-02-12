@@ -288,7 +288,7 @@ ggplot(
 ```
 
 
-```{r hist2-check{st2-check}
+```{r hist2-check}
 
 grade_this_code()
 
