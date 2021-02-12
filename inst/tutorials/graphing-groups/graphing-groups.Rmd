@@ -1,0 +1,558 @@
+---
+title: "Intro to R for Biology: Graphing Grouped Continuous Data"
+tutorial:
+  version: 1.0
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: >
+ Learn the best way to graph grouped continuous data
+---
+
+```{r setup, include=FALSE, exercise = TRUE}
+# packages
+library(learnr)
+library(gradethis)
+library(dplyr)
+library(ggplot2)
+library(ggbeeswarm)
+library(r4bio)
+
+#sets gradethis as exercise checker
+gradethis::gradethis_setup()
+
+tutorial_options(exercise.reveal_solution = FALSE)
+
+# hide non-exercise code chunks
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Intro to R for Biology:  Graphing with ggplot
+
+
+## Introduction
+
+Graphing grouped continuous data is very common in Biology.  For example, comparing the growth rate of caterpillars fed two different diets or the height of trees grown in drought compared to well-watered conditions.  
+
+However, common graph types used can make it impossible for a reader to critically evaluate and interpret the data and accompanying conclusions.  This tutorial demonstrates how to make several different types of graphs that are more effective at allowing the readers to critically evaluate the data.  
+
+Before completing this tutorial, you should be familiar with variable types, normal distributions, descriptive statistics (especially mean, standard deviation, median, and interquartile range), and what is represented in a histogram, boxplot, and violin plot.
+
+While not necessary to complete this tutorial, you should know how to do the following to understand the code - how to look at and understand the structure of a data frame, filter and summarize data using `dplyr`, and understand the basic grammar of graphics used in `ggplot`. 
+
+If you are unfamiliar with any of these basic statistical terms and concepts, then complete the other Tutorials in the **Into to R for Biology** course and use the resources in the tutorials to go deeper.
+
+For this tutorial, we will use data on the density of an invasive insect pest on Eastern hemlock trees.  
+
+The data were collected by Smith College students from the Research in Biodiversity, Ecology, and Conservation (Bio 131) course beginning in March of 2015. The dataset includes data from several semesters, and four different locations in Western Massachusetts. You can get more information by searching for `hemlockpests` in the help tab in RStudio or typing `?hemlockpests` in the RStudio Console.
+
+### Learning goals
+
+* Determine variable types and which axes to put each on
+* Discuss why bar graphs with means and standard errors can be misleading
+* Tips for initial data exploration
+* Learn the pros and cons of different graphs for grouped continuous data 
+* What to include in a figure legend
+
+
+## Variable Types
+
+Let's start by exploring the density of an invasive hemlock pest called the elongate hemlock scale (EHS)(*Fiorinia externa*) at the 4 different forest locations.
+
+```{r quiz1}
+
+quiz(
+  question("If we want to know if the density of EHS is different among the different forest locations, what would be the dependent variable?",
+           answer("forest location"),
+           answer("EHS density", correct=TRUE, message="You are amazing!"),
+           incorrect = "Remember - the dependent variable is the variable being measured in response to the independent variable which is the controlled variable.",
+           allow_retry = TRUE,
+           random_answer_order = TRUE),
+  
+  question("Given your answer to the previous question, you probably now know what the independent variable is as well.  Please select the independent variable below.",
+           answer("forest location", correct=TRUE, message="You are one smart cookie!"),
+           answer("EHS density"),
+           incorrect = "Remember - the independent variable is the thing chosen or controlled ahead of time.",
+           allow_retry = TRUE,
+           random_answer_order = TRUE),
+  
+  question("What type of variable is EHS density?",
+           answer("continuous", correct=TRUE, message="Genious!"),
+           answer("nominal"),
+           answer("ordinal"),
+           answer("catagorical"),
+           incorrect = "Remember - density was measured as the number of insects per centimeter of branch.  What kind of values would these be?",
+           allow_retry = TRUE,
+           random_answer_order = TRUE),
+  
+  question("What type of variable is forest location?",
+           answer("continuous"),
+           answer("nominal"),
+           answer("ordinal"),
+           answer("catagorical", correct=TRUE, message="Exactly right!"),
+           incorrect = "Remember - forest location does not have a natural order and each location does not take on any measureable or countable value in a range of values",
+           allow_retry = TRUE,
+           random_answer_order = TRUE)
+  
+  )
+
+```
+
+## Bar Graph
+
+Now you know we have a continuous dependent variable (EHS density) and a categorical independent variable (forest location, with 4 locations).  A common way to graph this type of data is a bar graph showing the means with standard errors as the error bars. 
+
+The name of the dataset we are going to be using is `hemlockpests`, the dependent variable is `EHS`, and the independent variable is `Location`
+
+Before we make this bar graph, we first have to do some calculations including the calculate the mean, standard deviation, count number of cases, and then calculate the standard error of the mean (which is inferential and not descriptive). This was done for you and will show below.
+
+```{r bar, exercise=TRUE}
+
+#first calculate the mean, sd, & count the observations in each group
+EHS.sum <- hemlockpests %>%
+  group_by(Location) %>%
+  summarise(mean = mean(EHS), 
+            sd = sd(EHS), 
+            n = n()) %>%
+  
+  #calculate the standard error
+  mutate(sem = sd/(sqrt(n)))
+
+#make bar graph
+ggplot(
+  data=EHS.sum, 
+  aes(x=Location,y=mean))+
+  geom_bar(stat="identity",  width = 0.5, fill = "steelblue")+
+  geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=0.1, size=1) +
+  ylab("EHS Density (insects/cm)") +
+  xlab("Location") +
+  coord_cartesian(xlim = c(0.5,4.5), ylim = c(0,5), expand=FALSE) +
+  theme_classic(base_size=16) +
+  theme(legend.position="none")
+
+
+```
+
+
+```{r quiz2}
+
+quiz(
+  question("Just from looking at the graph, what is the sample size of each group?",
+           answer("50"),
+           answer("218"),
+           answer("greater than 40"),
+           answer("unclear", correct=TRUE, message="You are a super star!"),
+           incorrect = "Can you tell just from looking at this graph how many cases there are in each group?",
+           allow_retry = TRUE,
+           random_answer_order = TRUE),
+  
+  question("Which of the locations have some EHS density values greater than 1.5 insects/cm?",
+           answer("all of them", correct=TRUE, message="You sure know how to interpret this type of graph well!"),
+           answer("FLE and MCL"),
+           answer("FLE, MCL, and SMC"),
+           answer("none of them"),
+           incorrect = "Remember that the bars show the means plus or minus the standard errors of the mean, but they do not show all the EHS density values for each location.",
+           allow_retry = TRUE,
+           random_answer_order = TRUE),
+  
+  question("Does EHS density show a normal distribution?",
+           answer("cannot tell from this graph", correct=TRUE, message="Outstanding!"),
+           answer("yes, it is normally distributed"),
+           answer("no, it is not normally distributed"),
+           incorrect = "What are some ways you CAN determine if a distribution is normal?  Does a bar graph of means and SE allow us to evaluate the distribution of the data?",
+           allow_retry = TRUE,
+           random_answer_order = TRUE)
+
+  
+  )
+
+```
+
+
+Did those previous three questions help you see that bar graphs can be misleading?
+
+See [Weissgerber et al. 2019 paper from the journal Circulation](https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.118.037777)(as well as the references cited within) for a good overview of why it is recommended that you DO NOT use bar graphs for data with continuous dependent variables grouped by a categorical independent variable.
+
+## Data Exploration
+
+Before choosing the best way to graph your data, it is good to explore the data and determine the sample size and distribution.
+
+Let's look at the sample size of each group
+
+```{r size, exercise=TRUE}
+
+hemlockpests %>%
+  group_by(Location) %>%
+  summarise(n = n())
+
+```
+
+```{r size2}
+
+question_text("What is the sample size of the smallest sample?",
+              answer("48", correct=TRUE),
+              incorrect = "Look at the n for SMC as a result of the code above",
+              allow_retry = TRUE,
+              trim=TRUE
+              )
+
+```
+
+A histogram is a useful tool to look at the distribution of your data.  It is not possible to effectively use a histogram on small sample sizes.  Some statisticians recommend you use histograms only when you have at least 30 cases.
+
+
+```{r quiz3}
+
+quiz(
+  question("Do all the location have greater than 30 cases?",
+           answer("No"),
+           answer("Yes", correct=TRUE, message="That's right!"),
+           incorrect = "We just determined that the location with the smallest sample size was SMC.  Did that location have more than 30 cases?",
+           allow_retry = TRUE,
+           random_answer_order = TRUE)
+  )
+
+```
+
+
+## Histograms
+
+Let's look at a histogram of the FLH location to start with
+
+```{r hist, exercise=TRUE}
+
+hemlockpests %>% 
+  filter(Location == "FLH") %>% 
+  
+  ggplot(aes(x = EHS))+ 
+  geom_histogram(binwidth = 0.4, color = "white", fill = "steelblue") +
+  xlab("EHS Density (insects/cm)") +
+  ylab("Count") +
+  coord_cartesian(expand=TRUE) +
+  theme_classic(base_size=14) +
+  theme(legend.position="none")
+
+```
+
+```{r quiz4}
+
+quiz(
+  question("Does it look like the FLH location exhibits a normal distribution for EHS density?",
+           answer("Yes"),
+           answer("No", correct=TRUE, message="Excellent work!"),
+           incorrect = "Do the bars show a nice symmetrical bell-shaped curve?",
+           allow_retry = TRUE,
+           random_answer_order = TRUE)
+  )
+
+```
+
+##
+
+Well that one location doesn't look like it has a normal distribution. There were a LOT of zeros. 
+
+Let's look at the histograms of all 4 locations
+
+```{r hist2, exercise=TRUE}
+
+ggplot(
+  data = hemlockpests, 
+  aes(x = EHS, fill=Location))+ 
+  geom_histogram(binwidth = 0.4, color = "white") +
+  facet_grid(Location ~ .) +
+  xlab("EHS Density (insects/cm)") +
+  ylab("Count") +
+  coord_cartesian(expand=TRUE) +
+  theme_classic(base_size=14) +
+  theme(legend.position="none")
+
+```
+
+The histogram of all 4 locations graphed on the same scale makes the histogram for some of the locations pretty hard to see.  This is useful for some quick data exploration, but this would not be an effective way to present these data to an audience or reader.
+
+## Box Plot
+
+Another type of graph that can be useful is the **box plot**.  A box plot summarizes the data by showing the median (the middle value where 50% of the data is above and below it, also called Q2 or the second quartile) as a solid line in the middle of a box whose limits are set by the interquartile range (which is the middle 50% of the data, between the first and third quartile).  Also shown are whiskers (you can change how these are defined so make sure you know how the code you are using is defining them) and any points outside of the whiskers are usually considered outliers.  
+
+An advantage of the box plot is that it gives you more information and can be used for distributions that are not normal as well as for those that are normal.  Like the histogram, a box plot is only useful when you have a large enough sample size.  Many statisticians recommend having at least 30 points per group to use box plots. 
+
+See the resources for the "Graphing with ggplot" tutorial if you want more information about boxplots.
+
+As we determined earlier, each of our locations has more than 30 cases so a box plot could be an appropriate way to summarize and present these data.  Take a look at the box plot after you run the code below. Note that the X in the box plots represents the mean, and outliers are shown as points outside of the limits of the whiskers.
+
+```{r box, exercise=TRUE}
+
+ggplot(
+  data = hemlockpests, 
+  aes(x=Location, y=EHS, color=Location))+ 
+  stat_boxplot(geom ='errorbar', width = 0.1, lwd=0.75, na.rm = TRUE) +
+  geom_boxplot(width = 0.5, na.rm = TRUE, lwd=0.75) +
+  stat_summary(fun=mean, na.rm = TRUE, geom="point", color = "black",
+               shape=4, size=2, stroke = 2) +
+  ylab("EHS Density (insects/cm)") +
+  xlab("Location") +
+  coord_cartesian(ylim=c(0,11.5),expand=TRUE) +
+  theme_classic(base_size=16) +
+  theme(legend.position="none") 
+
+```
+
+```{r quiz5}
+
+quiz(
+  question("Does it look like any of the locations exhibits a normal distribution for EHS density?",
+           answer("Yes"),
+           answer("No", correct=TRUE, message="You got it!"),
+           incorrect = "Do the boxes and their whiskers look symmetrical?  Are the means and medians close to each other?  Are there lots of outliers?",
+           allow_retry = TRUE,
+           random_answer_order = TRUE)
+  )
+
+```
+
+You can see that the box plots give more useful information and give a more accurate representation of the data than a bar graph showing the means and standard errors.
+
+However, one thing we cannot tell from this box plot is what the sample size is for each location.  We also can't see what the precise distribution of the data is within each group.
+
+## Adding Points
+
+We can add the points to the box plots which allows us to have a better sense of the sample size and the distribution of the data. Below we use `geom_jitter()` to randomly jitter the points horizontally.
+
+```{r box2, exercise=TRUE}
+
+ggplot(
+  data = hemlockpests, 
+  aes(x= Location, y = EHS))+ 
+  stat_boxplot(geom ='errorbar', width = 0.1,  na.rm = TRUE, lwd=0.75) +
+  geom_boxplot(na.rm = TRUE, outlier.shape= NA, fill="white",
+               width = 0.5, lwd=0.75) +
+  geom_jitter(
+    aes(x= Location, y = EHS, fill = Location), 
+    shape=21, size=1, alpha = 0.5, width=0.25) +
+  stat_summary(fun=mean, na.rm = TRUE, geom="point", color = "black",
+               shape=4, size=2, stroke = 2) +
+  ylab("EHS Density (insects/cm)") +
+  xlab("Location") +
+  coord_cartesian(expand=TRUE) +
+  theme_classic(base_size=16)  +
+  theme(legend.position="none") 
+
+```
+
+It really helps give a better sense of how many observations there are in each group to include the points, but random jittering doesn't give us as precise an idea of data distribution that something like a histogram can.
+
+## Beeswarm Jittering
+
+Another way to avoid overlapping points is to symmetrically jitter the points using the "beeswarm" method which stacks the points that overlap laterally so you can see the distribution of points better (when points spread out wider, that means there are more points in that part of the distribution). 
+
+We use the `geom_beeswarm()` function from the `ggbeeswarm` package to do beeswarm jittering of points.
+
+```{r box3, exercise=TRUE}
+
+ggplot(
+  data = hemlockpests, 
+  aes(x= Location, y = EHS))+ 
+  stat_boxplot(geom ='errorbar', width = 0.1,  na.rm = TRUE, lwd=0.75) +
+  geom_boxplot(na.rm = TRUE, outlier.shape= NA, fill="white",
+               width = 0.5, lwd=0.75) +
+  geom_beeswarm(
+    aes(x= Location, y = EHS, fill = Location), 
+    shape=21, size=1, alpha = 0.5, priority = "random") +
+  stat_summary(fun=mean, na.rm = TRUE, geom="point", color = "black",
+               shape=4, size=2, stroke = 2) +
+  ylab("EHS Density (insects/cm)") +
+  xlab("Location") +
+  coord_cartesian(expand=TRUE) +
+  theme_classic(base_size=16)  +
+  theme(legend.position="none") 
+
+```
+
+This is an improvement in that we can see the distribution of the data more effectively.  But look at how spread out the points are in the FLH location!
+
+## Quasirandom Jittering
+
+Yet another way to avoid overlapping points is to jitter the points using the "quasirandom" method (which uses a van der Corput sequence) as shown below. We use the `geom_quasirandom()` function from the `ggbeeswarm` package to do quasirandom jittering of points.
+
+```{r box4, exercise=TRUE}
+
+ggplot(
+  data = hemlockpests, 
+  aes(x= Location, y = EHS))+ 
+  stat_boxplot(geom ='errorbar', width = 0.1,  na.rm = TRUE, lwd=0.75) +
+  geom_boxplot(na.rm = TRUE, outlier.shape= NA, fill="white",
+               width = 0.5, lwd=0.75) +
+  geom_quasirandom(
+    aes(x= Location, y = EHS, fill = Location), 
+    shape=21, size=1, alpha = 0.5, width=0.3) +
+  stat_summary(fun=mean, na.rm = TRUE, geom="point", color = "black",
+               shape=4, size=2, stroke = 2) +
+  ylab("EHS Density (insects/cm)") +
+  xlab("Location") +
+  coord_cartesian(expand=TRUE) +
+  theme_classic(base_size=16)  +
+  theme(legend.position="none") 
+
+```
+
+This method of jittering is often a nice compromise between showing the distribution of points better, but not getting quite so spread out as the beeswarm method when there are a lot of points with the same value.
+
+## Violin Plot
+
+When you have very large sample sizes, showing all the points can get overwhelming. Another option is to make a violin plot, which shows the density estimate for each group.  The more data in a specific range, the wider the violin goes in that range. It helps give a good sense of the distribution of the data by showing the shape. It is similar to `geom_quasirandom` but in this case you are just showing the outline of the swarm of points rather than showing the points themselves.
+
+Let's look at a simple violin plot
+
+```{r violin, exercise=TRUE, message=FALSE}
+
+ggplot(
+  data=hemlockpests,
+  aes(x=Location, y=EHS, fill=Location)) +
+    geom_violin(width=1.4) +
+    ylab("EHS Density (insects/cm)") +
+    xlab("Location") +
+    theme_classic(base_size=18) +
+    theme(legend.position="none")
+
+```
+
+Sometimes people also like to put a little boxplot inside of the violin plot because it adds more information such as where the median,  middle 50% of the data (box), and outliers are.
+
+```{r violin2, exercise=TRUE, warning=FALSE}
+
+ggplot(
+  data=hemlockpests,
+  aes(x=Location, y=EHS, fill=Location)) +
+    geom_violin(width=1.4) +
+    geom_boxplot(width=0.1, color="black", alpha=0.8) +
+    ylab("EHS Density (insects/cm)") +
+    xlab("Location") +
+    theme_classic(base_size=18) +
+    theme(legend.position="none")
+
+```
+
+This graph is similar to the box plot with quasirandom jittered points, except the points have been replaced by a violin plot and the box plots are smaller. 
+
+## Adding Sample Size
+
+It is REALLY important for a reader to know what your sample size is within each group to know if you chose the right type of graph and be able to accurately be able to interpret the data.
+
+You can always give your sample size for each group in the figure caption (also called the figure legend) below the graph.  However, it can be helpful to have the sample sizes clearly given in the graph.
+
+The code below gets a little fancier, but it is a nice way to add the sample size for each group on the x-axis.
+
+```{r violin3, exercise=TRUE, warning=FALSE}
+
+#sample size
+sample_size = hemlockpests %>% 
+  group_by(Location) %>% 
+  summarize (num=n())
+
+#violin plot with box plots and sample sizes
+hemlockpests %>% 
+  left_join(sample_size, by="Location") %>% 
+  mutate(myaxis = paste0(Location, "\n", "n=", num)) %>% 
+  ggplot(aes(x=myaxis, y=EHS, fill=Location)) +
+    geom_violin(width=1.4) +
+    geom_boxplot(width=0.1, color="black", alpha=0.8) +
+    ylab("EHS Density (insects/cm)") +
+    xlab("Location") +
+    theme_classic(base_size=16) +
+    theme(legend.position="none")
+
+```
+
+See how the sample size (n) for each location has also been added along the x-axis. Because you can't see the points, it is even more important to make the sample size for each group clear.
+
+## Small Samples
+
+When the sample size is very small, you cannot summarize with a violin plot, box plot, or histogram.  Instead, you should show all the points and a measure of central tendency (mean or median) using a dot plot.  
+
+How small is small?  That is not an easy question to answer.  When the sample size is less than ~20 it is usually best to show all the data in a dot plot (remember that box plots aren't useful unless n>30 for each group). 
+
+Below is the code for a dot plot with the mean shown as the thick horizontal bar and points quasirandomly jittered for the data for one semester (in this case, the Winter of 2019)
+
+```{r small, exercise=TRUE}
+
+#Filter for one semester Spring 2019
+small <- hemlockpests %>% 
+  filter (SamplingDate > as.Date("2018-11-20"))
+
+#Dot plot with median
+ggplot(
+  data = small, 
+  aes(x= Location, y = EHS))+ 
+  geom_quasirandom(
+    aes(x= Location, y = EHS, fill = Location), 
+    shape=21, size=3, alpha = 0.75, width=0.3) +
+  stat_summary(fun = median, fun.min = median, fun.max = median, 
+               geom = "crossbar", na.rm = TRUE,
+               width = 0.5, size = 0.75, color = "black") +
+  ylab("EHS Density (insects/cm)") +
+  xlab("Location") +
+  coord_cartesian(expand=TRUE) +
+  theme_classic(base_size=16) +
+  theme(legend.position="none")
+
+```
+
+Recall from when we added points to boxplots that you can jitter the points using different methods. You can always try using the code for this tutorial to see dot plots jittered with three different methods (random, beeswarm, and quasirandom) to see which one works best for the data.
+
+While it can be hard or even impossible to tell if a small sample size is normal or not (again, you need around 20-30 cases in each group to determine if the data are normally distributed), we know from looking at the larger dataset that EHS density is not normally distributed.  That is why using the median here is a good choice for the measure of central tendency.  
+
+## Practice
+
+You have now seen several different ways to graph the EHS density data in these 4 forest plots.  Use the code chunk below to try making a graph of **HWA** density (hemlock woolly adelgid, *Adelgis tsugae*). Navigate backwards and copy code from the graphs demonstrated in this tutorial for EHS, then change EHS to HWA in the code (make sure you catch them all including in the axis label!).
+
+```{r play, exercise=TRUE}
+
+
+
+```
+
+Chose your favorite graph you made for HWA that you think best presents the results.Then save a copy of the graph (right+click on the graph and then save it or take a screenshot).  then turn your graph in as instructed (paper printout, learning management system, lab notebook, Google Form, or whatever your instructor tells you).  **Make sure to include a proper figure legend below the graph.**
+
+## Figure Legends
+
+A figure legend is a description below the figure that makes it possible for a reader to completely understand and interpret your graph with just the graph and the figure legend.  All symbols must be defined, sample size should be included in some fashion, and add other important details (for example, full species names, full location names including where in the world these locations are, date range when data are collected, etc).
+
+If you include a box plot, you **must describe all the parts of the boxplot in your figure legend** including what the whiskers represent. The whiskers can be changed to represent different things. 
+
+For reference, this is what the default is for the `geom_boxplot()` function as given in the help documentation:
+
+"The lower and upper hinges correspond to the first and third quartiles (the 25th and 75th percentiles). This differs slightly from the method used by the boxplot() function, and may be apparent with small samples. See boxplot.stats() for for more information on how hinge positions are calculated for boxplot().
+
+The upper whisker extends from the hinge to the largest value no further than 1.5 * IQR from the hinge (where IQR is the inter-quartile range, or distance between the first and third quartiles). The lower whisker extends from the hinge to the smallest value at most 1.5 * IQR of the hinge. Data beyond the end of the whiskers are called "outlying" points and are plotted individually."
+
+## Conclusion
+
+I hope this lesson has helped you learn how to choose and make the best graph for grouped continuous data using ggplot.
+
+Don't let your graphs hide the interesting parts of your data!  
+
+Whenever possible, show all the points and give a sense of the distribution of the data.
+
+```{r sum_stat, out.width = "80%"}
+knitr::include_graphics("images/summary_statistics.png")
+```
+
+Artwork by [Allison Horst](https://github.com/allisonhorst/stats-illustrations) 
+
+
+## Resources
+
+* [Weissgerber et al. 2019 paper from the journal Circulation](https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.118.037777) (and the references cited within it): this is a good overview of why it is recommended that you **DO NOT use bar graphs** for data with continuous dependent variables grouped by a categorical independent variable.  This paper focuses on visualization problems in peripheral vascular disease journals, but the conclusions are widely applicable.
+* [Webinar Report: Transforming data visualisation to improve transparency and reproducibility](https://elifesciences.org/inside-elife/5114d8e9/webinar-report-transforming-data-visualisation-to-improve-transparency-and-reproducibility): This is a recording of a webinar talk given by Tracey Weissgerber that included many of the same concepts as the 2019 paper above.
+
+### Help pages for some useful functions used with `ggplot()` 
+
+* [geom_bar](https://ggplot2.tidyverse.org/reference/geom_bar.html)
+* [geom_histogram](https://ggplot2.tidyverse.org/reference/geom_histogram.html)
+* [geom_boxplot](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)
+* [geom_jitter](https://ggplot2.tidyverse.org/reference/geom_jitter.html)
+* [geom_violin](https://ggplot2.tidyverse.org/reference/geom_violin.html)
+* [stat_summary](https://ggplot2.tidyverse.org/reference/stat_summary.html)
+* [ggbeeswarm](https://github.com/eclarke/ggbeeswarm)
