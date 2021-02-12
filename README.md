@@ -92,3 +92,11 @@ Here is a list of the tutorials in the **Intro to R for Biology** course found i
 * Learn how to do a log transformation of axes and data
 * Learn some best practices in basic data visualization
 
+6. **Graphing Grouped Continuous Data** ("graphing-groups")
+
+* Determine variable types and which axes to put each on
+* Discuss why bar graphs with means and standard errors can be misleading
+* Tips for initial data exploration
+* Learn the pros and cons of different graphs for grouped continuous data 
+* What to include in a figure legend
+
