@@ -315,7 +315,7 @@ hemlock <- read_csv(here("extdata/hemlock_diam.csv"),
 ```
 
 
-Look at the structure of the hemlock dataset again by using the code chunk below 
+Look at the structure of the hemlock dataset again by using the code chunk below.  This chunk is intentionally blank so you can decide what functions to use to look at the structure.
 
 ```{r play2, exercise=TRUE, exercise.setup = "import3"}
 
