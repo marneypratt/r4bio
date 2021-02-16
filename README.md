@@ -28,10 +28,19 @@ install.packages("ggbeeswarm")
 install.packages("here")
 install.packages("learnr") 
 install.packages("devtools")
-devtools::install_github('rstudio/htmltools')
-devtools::install_github("rstudio-education/gradethis", force = TRUE)
-devtools::install_github("marneypratt/r4bio")
 
+```
+
+Once the above packages successfully load, then load each of the following packages separately by pasting each line of code one at a time in the console. 
+
+If you get a message asking if you want to update other packages, select 1 for ALL to update all the required packages.
+
+```
+devtools::install_github('rstudio/htmltools')
+
+devtools::install_github("rstudio-education/gradethis", force = TRUE)
+
+devtools::install_github("marneypratt/r4bio")
 ```
 
 ## Launch a Tutorial:
