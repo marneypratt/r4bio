@@ -22,9 +22,10 @@ Imports:
     dplyr,
     ggplot2,
     ggbeeswarm,
-    learnr,
+    learnr (>= 0.10.1.9008),
     gradethis (>= 0.2.0.9001)
 Remotes:  
+    rstudio/learnr,
     rstudio-education/gradethis,
 Depends: 
     R (>= 2.10)
