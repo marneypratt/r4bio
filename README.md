@@ -22,26 +22,14 @@ Before you can use this series of tutorials, you must install some packages in R
 
 You can install or update the following packages by copying the code below, pasting in the console (bottom left pane in RStudio), then pressing enter:
 
+(make sure to install or update all other packages if requested)
+
 ```
-install.packages("tidyverse")   
-install.packages("ggbeeswarm")  
-install.packages("here")
-install.packages("learnr") 
 install.packages("devtools")
-
-```
-
-Once the above packages successfully load, then load each of the following packages separately by pasting each line of code one at a time in the console. 
-
-If you get a message asking if you want to update other packages, select 1 for ALL to update all the required packages.
-
-```
-devtools::install_github('rstudio/htmltools')
-
-devtools::install_github("rstudio-education/gradethis", force = TRUE)
-
 devtools::install_github("marneypratt/r4bio")
+
 ```
+
 
 ## Launch a Tutorial:
 
