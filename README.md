@@ -20,15 +20,21 @@ If you already have R and RStudio installed on your computer, then please update
 
 Before you can use this series of tutorials, you must install some packages in R.  See the instructions for [package installation from Modern Dive](https://moderndive.com/1-getting-started.html#package-installation) if you have never installed R packages before.
 
-You can install or update the following packages by copying the code below, pasting in the console (bottom left pane in RStudio), then pressing enter:
+You can install or update the following packages by copying the code below, pasting in the console (bottom left pane in RStudio), then pressing enter (do each line separately):
 
-(make sure to install or update all other packages if requested)
 
 ```
 install.packages("devtools")
+
 devtools::install_github("marneypratt/r4bio")
 
 ```
+
+**Some troubleshooting tips:**
+
+* Run each line of code separately (`devtools` must be successfully installed before you can install `r4bio`)
+* You must install package dependencies, but you can try skipping updates if they give you trouble
+* If you want to update packages but you get errors, try removing the older version, restart R, then try again
 
 
 ## Launch a Tutorial:
