@@ -1,7 +1,7 @@
 Package: r4bio
 Type: Package
 Title: Intro to R for Biology
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Marney",
            family = "Pratt",
@@ -26,6 +26,6 @@ Imports:
     gradethis (>= 0.2.0.9001)
 Remotes:  
     rstudio/learnr,
-    rstudio-education/gradethis,
+    rstudio/gradethis,
 Depends: 
     R (>= 2.10)
