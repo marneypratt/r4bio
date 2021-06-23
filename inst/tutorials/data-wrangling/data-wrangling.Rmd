@@ -19,7 +19,9 @@ library(dplyr)
 library(r4bio)
 
 #sets gradethis as exercise checker
-gradethis::gradethis_setup()
+gradethis::gradethis_setup(
+  code_correct = "Excellent Work!"
+)
 
 tutorial_options(exercise.reveal_solution = FALSE)
 

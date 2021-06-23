@@ -21,7 +21,9 @@ library(ggbeeswarm)
 library(r4bio)
 
 #sets gradethis as exercise checker
-gradethis::gradethis_setup()
+gradethis::gradethis_setup(
+  code_correct = "Excellent Work!"
+)
 
 tutorial_options(exercise.reveal_solution = FALSE)
 
@@ -82,16 +84,16 @@ quiz(
            answer("continuous", correct=TRUE, message="Genious!"),
            answer("nominal"),
            answer("ordinal"),
-           answer("catagorical"),
+           answer("categorical"),
            incorrect = "Remember - density was measured as the number of insects per centimeter of branch.  What kind of values would these be?",
            allow_retry = TRUE,
            random_answer_order = TRUE),
   
   question("What type of variable is forest location?",
            answer("continuous"),
-           answer("nominal"),
+           answer("numerical"),
            answer("ordinal"),
-           answer("catagorical", correct=TRUE, message="Exactly right!"),
+           answer("categorical", correct=TRUE, message="Exactly right!"),
            incorrect = "Remember - forest location does not have a natural order and each location does not take on any measureable or countable value in a range of values",
            allow_retry = TRUE,
            random_answer_order = TRUE)

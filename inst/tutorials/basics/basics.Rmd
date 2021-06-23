@@ -14,12 +14,13 @@ description: >
 ```{r setup, include=FALSE, exercise = TRUE}
 # packages
 library(learnr)
-#devtools::install_github("rstudio-education/gradethis", force = TRUE)
 library(gradethis)
 library(ggplot2)
 
 #sets gradethis as exercise checker
-gradethis::gradethis_setup()
+gradethis::gradethis_setup(
+  code_correct = "Excellent Work!"
+)
 
 tutorial_options(exercise.reveal_solution = FALSE)
 
