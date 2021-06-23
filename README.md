@@ -2,7 +2,7 @@
 
 ### by Marney Pratt
 
-### Last updated on February 12, 2021
+### Last updated on June 22, 2021
 
 ## Why use learnr to learn R?
 
@@ -24,15 +24,15 @@ You can install or update the following packages by copying the code below, past
 
 
 ```
-install.packages("devtools")
+install.packages("remotes")
 
-devtools::install_github("marneypratt/r4bio")
+remotes::install_github("marneypratt/r4bio")
 
 ```
 
 **Some troubleshooting tips:**
 
-* Run each line of code separately (`devtools` must be successfully installed before you can install `r4bio`)
+* Run each line of code separately (`remotes` must be successfully installed before you can install `r4bio`)
 * You must install package dependencies, but you can try skipping updates if they give you trouble
 * If you want to update packages but you get errors, try removing the older version, restart R, then try again
 
