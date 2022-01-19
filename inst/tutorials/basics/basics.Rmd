@@ -65,7 +65,7 @@ ggplot(data = iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
 ```
 
 
-```{r hypothesis, echo=FALSE}
+```{r hypothesis}
 
 quiz(
   question("Does the graph you get from the code above support the hypothesis that *Iris versicolor* is intermediate in size because it is a hybrid between *I. setosa* and *I. virginica*?",
