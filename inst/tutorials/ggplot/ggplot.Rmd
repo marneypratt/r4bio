@@ -8,7 +8,7 @@ output:
     allow_skip: true
 runtime: shiny_prerendered
 description: >
- Learn how to make graphs with `ggplot()` from the `ggplot2` package
+ Learn how to make graphs with `ggplot()` from the `{ggplot2}` package
 ---
 
 ```{r setup, include=FALSE, exercise = TRUE}
@@ -35,7 +35,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Introduction
 
-In this lesson, we will learn how to make several types of graphs using the `ggplot()` function in the `ggplot2` package.  
+In this lesson, we will learn how to make several types of graphs using the `ggplot()` function in the `{ggplot2}` package.  
 
 To complete this tutorial successfully, you will need to understand variable types (continuous, categorical, dependent, independent, etc), what a histogram, boxplot, and scatterplot are, and be able to build on the tutorials that came before this one in the **Intro to R for Biology** course.  Use the resources given for this lesson to help you with basic terminology and understanding the different graph types if you haven't learned it before or need a refresher.
 
@@ -43,7 +43,7 @@ As a reminder, the hemlock data were collected by Smith College Bio 131 students
 
 ### Learning goals
 
-* Use the `ggplot2` package to make
+* Use the `{ggplot2}` package to make
     + scatterplots
     + histograms
     + box plots
@@ -56,7 +56,7 @@ As a reminder, the hemlock data were collected by Smith College Bio 131 students
 
 The gg in ggplot stands for the "grammar of graphics" which is a type of visualization theory developed by Leland Wilkinson. This theory has a defined set of rules that builds a graph by using layers.  
 
-In the `ggplot()` function from the `ggplot2` package there are three essential components to making any graph:
+In the `ggplot()` function from the `{ggplot2}` package there are three essential components to making any graph:
 
 1. the data
 3. aesthetics attributes (aes) such as which variables go with which axes, color, shape, fill, size etc 
@@ -564,7 +564,7 @@ ggplot(
 
 ```
 
-
+If you want to save a copy of a graph you make, you can take a screen shot or right-click (Windows) or command-click (Mac) and then select the option to copy or save the image. These options are fine for low quality versions of the graph. Use the [ggsave()](https://ggplot2.tidyverse.org/reference/ggsave.html) function from the `{ggplot2}` package to save a higher quality version of your graphs.
 
 ## Conclusion
 

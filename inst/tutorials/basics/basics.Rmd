@@ -99,7 +99,7 @@ Some of the important topics this specific tutorial will cover include
 
 One of the most important thing to know about is packages. R packages are a really powerful way to put a lot of useful code, documentation, and data together to make certain tasks easier to do.
 
-When you start a new R session, only certain packages are pre-loaded for you including the `base` R package and several others. But many other useful packages must be installed (once) and then loaded (every time you restart R) for you to be able to use them. A good analogy is how you have to download an app onto your computer or phone once to install it, but then you have to actually open the app each time you want to use it.
+When you start a new R session, only certain packages are pre-loaded for you including the `{base}` R package and several others. But many other useful packages must be installed (once) and then loaded (every time you restart R) for you to be able to use them. A good analogy is how you have to download an app onto your computer or phone once to install it, but then you have to actually open the app each time you want to use it.
 
 To install a package we use the code `install.packages("packageName")` - and remember, you only have to do this **ONCE** for a package on a particular computer
 
@@ -122,13 +122,13 @@ ggplot(data = iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
 
 Notice we did NOT use `install.packages()` in this code because the package had already been installed.
 
-We did use `library(ggplot2)` because we needed to load the `ggplot2` package (which is the main graphing package we will use in this course)
+We did use `library(ggplot2)` because we needed to load the `{ggplot2}` package (which is the main graphing package we will use in this course)
 
 You might notice that there are a lot different words followed by parentheses.  These words followed by parentheses are called functions.
 
 `library()` is a function what loads the package inside the parentheses.
 
-`ggplot()` is a function from the `ggplot2` package that makes graphs using the code that follows it (including additional functions)
+`ggplot()` is a function from the `{ggplot2}` package that makes graphs using the code that follows it (including additional functions)
 
 If we want to be really clear what package a function comes from, we use a double colon between the package and function name `package::function()` so in this example it would be `ggplot2::ggplot()`
 

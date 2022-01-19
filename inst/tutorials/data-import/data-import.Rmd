@@ -209,9 +209,9 @@ See this link for more information on what tidy data is and how to get your data
 
 For all the tutorials in this course, we will use a simple spreadsheet file format called a comma-separated values file or **csv** file to import data.  This file type is the most commonly used and will work with any software that can handle spreadsheets.  For most software, you can use functions such as SaveAs, Download as, or Export and chose .csv as the file type to make a csv file.
 
-We are going to use a package called `readr` from the tidyverse suite of packages to import data. We will also use the `here` package to help us manage file paths so that R can find the right place where the data file is.
+We are going to use a package called `{readr}` from the tidyverse suite of packages to import data. We will also use the `{here}` package to help us manage file paths so that R can find the right place where the data file is.
 
-To use these two packages, we have to load them with the `library()` function. (note that `readr` and `here` should have been installed for you when you loaded this course)
+To use these two packages, we have to load them with the `library()` function. (note that `{readr}` and `{here}` should have been installed for you when you loaded this course)
 
 ```{r readr, exercise=TRUE, message=FALSE}
 library(readr)
@@ -221,7 +221,7 @@ library(here)
 
 Smith College students in the Bio 131 course (Research in Biodiversity, Ecology, and Conservation) collected data on the diameter and height of Eastern hemlock trees (*Tsuga canadensis*) as well as noted whether each tree was infested with one of two invasive insects.
 
-Use the `read_csv()` function from the `readr` package along with the `here()` function from the `here` package to load the "hemlocks_diam.csv" file and assign it to an object named hemlock by running the code below.
+Use the `read_csv()` function from the `{readr}` package along with the `here()` function from the `{here}` package to load the "hemlocks_diam.csv" file and assign it to an object named hemlock by running the code below.
 
 
 
@@ -235,7 +235,7 @@ The way you assign a value or result to an object in R is by using the **assignm
 
 Think of the assignment operator as an arrow. You are assigning the result of the code on the right side of the arrow to the object name on the left side of the arrow.
 
-We import the csv file into R with `read_csv` (and using `here` to help us simplify file paths), but in order to do other things with the data we imported we have to give it a name by using the assignment operator.
+We import the csv file into R with `read_csv` (and using `{here}` to help us simplify file paths), but in order to do other things with the data we imported we have to give it a name by using the assignment operator.
 
 Notice that nothing printed out as a result of the code we ran above.  To look at the `hemlock` object that we just created by importing the data, we have to use other functions to look at the structure of the data. We will do this in the next section
 
