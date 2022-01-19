@@ -12,7 +12,7 @@ description: >
 
 ---
 
-```{r setup, include=FALSE, exercise = TRUE}
+```{r setup, include=FALSE}
 # packages
 library(learnr)
 library(gradethis)

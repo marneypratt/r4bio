@@ -11,7 +11,7 @@ description: >
  Learn some basics of how to use R including installing and loading packages, what functions are, and how to use help pages
 ---
 
-```{r setup, include=FALSE, exercise = TRUE}
+```{r setup, include=FALSE}
 # packages
 library(learnr)
 library(gradethis)

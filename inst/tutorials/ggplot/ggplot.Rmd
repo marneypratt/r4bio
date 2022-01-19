@@ -11,7 +11,7 @@ description: >
  Learn how to make graphs with `ggplot()` from the `{ggplot2}` package
 ---
 
-```{r setup, include=FALSE, exercise = TRUE}
+```{r setup, include=FALSE}
 # packages
 library(learnr)
 library(gradethis)

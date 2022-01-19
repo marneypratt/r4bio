@@ -11,7 +11,7 @@ description: >
  Learn the best way to graph grouped continuous data
 ---
 
-```{r setup, include=FALSE, exercise = TRUE}
+```{r setup, include=FALSE}
 # packages
 library(learnr)
 library(gradethis)
@@ -48,7 +48,11 @@ If you are unfamiliar with any of these basic statistical terms and concepts, th
 
 For this tutorial, we will use data on the density of an invasive insect pest on Eastern hemlock trees.  
 
-The data were collected by Smith College students from the Research in Biodiversity, Ecology, and Conservation (Bio 131) course beginning in March of 2015. The dataset includes data from several semesters, and four different locations in Western Massachusetts. You can get more information by searching for `hemlockpests` in the help tab in RStudio or typing `?hemlockpests` in the RStudio Console.
+The data were collected by Smith College students from the Research in Biodiversity, Ecology, and Conservation (Bio 131) course beginning in March of 2015. The dataset includes data from several semesters, and four different locations in Western Massachusetts. 
+
+See this link for more information about the data (=metadata): [hemlockpests](https://docs.google.com/document/d/1fZHsb6my8DkOV8iTq0Rmr_5acViu8hnBOU5Wxyxt74Q/edit#bookmark=id.vst3veyyl3ty)
+
+If working on a local desktop version where you have installed the `{r4bio}` package, you can get more information by searching for `hemlockpests` in the help tab in RStudio or typing `?hemlockpests` in the RStudio Console.
 
 ### Learning goals
 
@@ -349,7 +353,7 @@ It really helps give a better sense of how many observations there are in each g
 
 Another way to avoid overlapping points is to symmetrically jitter the points using the "beeswarm" method which stacks the points that overlap laterally so you can see the distribution of points better (when points spread out wider, that means there are more points in that part of the distribution). 
 
-We use the `geom_beeswarm()` function from the `ggbeeswarm` package to do beeswarm jittering of points.
+We use the `geom_beeswarm()` function from the `{ggbeeswarm}` package to do beeswarm jittering of points.
 
 ```{r box3, exercise=TRUE}
 
@@ -515,7 +519,11 @@ You have now seen several different ways to graph the EHS density data in these 
 
 ```
 
-Chose your favorite graph you made for HWA that you think best presents the results.Then save a copy of the graph (right+click on the graph and then save it or take a screenshot).  then turn your graph in as instructed (paper printout, learning management system, lab notebook, Google Form, or whatever your instructor tells you).  **Make sure to include a proper figure legend below the graph.**
+Choose your favorite graph you made for HWA that you think best presents the results. 
+
+If you want to save a copy of a graph you make, you can take a screen shot or right-click (Windows) or command-click (Mac) and then select the option to copy or save the image. These options are fine for low quality versions of the graph. Use the [ggsave()](https://ggplot2.tidyverse.org/reference/ggsave.html) function from the `{ggplot2}` package to save a higher quality version of your graphs.
+
+If you are going to present this graph to others, **make sure to include a proper figure legend below the graph.**
 
 ## Figure Legends
 

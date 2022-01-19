@@ -8,10 +8,10 @@ output:
     allow_skip: true
 runtime: shiny_prerendered
 description: >
- Learn about what descriptive statistics are and how to calculate them using dplyr
+ Learn about what descriptive statistics are and how to calculate them using `{dplyr}`
 ---
 
-```{r setup, include=FALSE, exercise = TRUE}
+```{r setup, include=FALSE}
 # packages
 library(learnr)
 library(gradethis)
@@ -35,20 +35,20 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Introduction
 
-In this lesson, we will learn some basic ways to summarize data with descriptive statistics using the `summarize()` and `group_by()` functions from the `dplyr` package.
+In this lesson, we will learn some basic ways to summarize data with descriptive statistics using the `summarize()` and `group_by()` functions from the `{dplyr}` package.
 
 We will also briefly cover some basic statistical concepts, but if you have never learned about descriptive statistics or need a refresher, please see the resources for this lesson for more detailed information.
 
 This tutorial assumes you understand how to use the pipe operator `%>%` and some other basic R skills. See the other **Intro to R for BIology** tutorials for review.
 
-Like many of the tutorials in **Intro to R for Biology**, we will use the hemlocks dataset from the `r4bio` package. 
+Like many of the tutorials in **Intro to R for Biology**, we will use the hemlocks dataset from the `{r4bio}` package. 
 
 As a reminder, the hemlock data were collected by Smith College Bio 131 students. They measured the diameter and height for eastern hemlock trees at 4 locations in Western Massachusetts. You can get more information by searching for `hemlocks` in the help tab in RStudio or typing `?hemlocks` in the RStudio Console.
 
 ### Learning goals
 
 * Learn some basic concepts about descriptive statistics
-* Use the `group_by()` and `summarize()` functions from `dplyr` to calculate descriptive statistics
+* Use the `group_by()` and `summarize()` functions from `{dplyr}` to calculate descriptive statistics
 
 
 ## Measure of Central Tendency
@@ -168,7 +168,7 @@ To summarize a sample or population, we need more than just the measure of centr
 
 There are several possible measures of dispersion you could use to describe the spread of the data.  When the data are normally distributed, we usually use the standard deviation.  When the data are not normal, a common measure of dispersion is the interquartile range (which gives the middle 50% of the data).  Look at the resources for this tutorial if you want to learn more about measures of dispersion.
 
-Let's use the `summarize()` function from the dplyr package to calculate some descriptive statistics for the diameter of all the hemlock trees.  (note that you can spell the function `summarize()` or `summarise()` but we will use `summarize()` in this tutorial)
+Let's use the `summarize()` function from the `{dplyr}` package to calculate some descriptive statistics for the diameter of all the hemlock trees.  (note that you can spell the function `summarize()` or `summarise()` but we will use `summarize()` in this tutorial)
 
 The general form for the `summarize()` function using the pipe operator is
 
@@ -183,7 +183,7 @@ mydata %>%
 * **column_name** is the name of the column you want to summarize
 
 
-Don't forget, we need to load the `dplyr` package before we can use any functions from it. Also note that there are comments after `#` to tell you what each line of code is doing.
+Don't forget, we need to load the `{dplyr}` package before we can use any functions from it. Also note that there are comments after `#` to tell you what each line of code is doing.
 
 ```{r sum1, exercise=TRUE}
 library(dplyr)
@@ -331,7 +331,7 @@ hemlocks %>%
 
 Do you see what adding `group_by()` does?  It allows us to compute the descriptive statistics for each group of interest (in this case size class of hemlock trees).
 
-Let's make a histogram that also splits by size class (note that the code to make a histogram is shown below, but we will learn how to make graphs using `ggplot2` in other tutorials)
+Let's make a histogram that also splits by size class (note that the code to make a histogram is shown below, but we will learn how to make graphs using `{ggplot2}` in other tutorials)
 
 ```{r hist_size, exercise=TRUE}
 
@@ -360,7 +360,7 @@ You now have the skills to calculate some basic descriptive statistics in R.
 
 This lesson and overall course do not go into depth on how to determine if data are normally distributed or how to transform non-normal data.  An example of a more in-depth resource is Chapter 10 - The normal distribution from Whitlock and Schluter 2020 ([online resources associated with Chapter 10](https://whitlockschluter3e.zoology.ubc.ca/chapter10.html)).
 
-The next lesson will help you learn how to make histograms and other graphs using the `ggplot()` function in the `ggplot2` package.
+The next lesson will help you learn how to make histograms and other graphs using the `ggplot()` function in the `{ggplot2}` package.
 
 
 ## Resources

@@ -11,7 +11,7 @@ description: >
  Learn how to "wrangle" data using the dplyr package.
 ---
 
-```{r setup, include=FALSE, exercise = TRUE}
+```{r setup, include=FALSE}
 # packages
 library(learnr)
 library(gradethis)
@@ -38,7 +38,7 @@ In this lesson, we will learn some basic ways to manipulate a data frame (often 
 
 ### Learning goals
 
-* Use the `dplyr` package to filter, sort, and manipulate data
+* Use the `{dplyr}` package to filter, sort, and manipulate data
 * How to find and remove missing data
 * Learn about the pipe operator ` %>% `
 
@@ -49,9 +49,9 @@ knitr::include_graphics("images/dplyr_hex.png")
 
 ## Hemlock Data
 
-Smith College Bio 131 students collected data on Eastern hemlock trees (*Tsuga canadensis*) in four different locations in Western Massachusetts. This is the same data that we learned how to import in the "Getting Data into R" tutorial. To make things simpler, this dataset is also included with this package and can be loaded just by loading the `r4bio` package.
+Smith College Bio 131 students collected data on Eastern hemlock trees (*Tsuga canadensis*) in four different locations in Western Massachusetts. This is the same data that we learned how to import in the "Getting Data into R" tutorial. To make things simpler, this dataset is also included with this package and can be loaded just by loading the `{r4bio}` package.
 
-We will be using a package called `dplyr` to manipulate and investigate the `hemlocks` dataset.  Let's load both of the necessary packages below:
+We will be using a package called `{dplyr}` to manipulate and investigate the `hemlocks` dataset.  Let's load both of the necessary packages below:
 
 ```{r packages, exercise=TRUE, message=FALSE}
 library(dplyr) #for manipulating data
@@ -62,7 +62,7 @@ library(r4bio) #for loading the hemlocks dataset
 
 Not that there are # signs in the code above.  Any text you put after a # sign will be ignored by R.  This allows us to comment on our code so we can remember what we did and why later.  It is good practice to comment a lot for your future self and for others to be able to understand your code.
 
-In the last "Getting Data into R" tutorial, we used several functions from base R to look at the structure of data.  Let's try the `glimpse()` function from the `dplry` package to look at the structure of the `hemlocks` dataset. 
+In the last "Getting Data into R" tutorial, we used several functions from base R to look at the structure of data.  Let's try the `glimpse()` function from the `{dplyr}` package to look at the structure of the `hemlocks` dataset. 
 
 
 ```{r glimpse, exercise=TRUE, message=FALSE}
@@ -118,7 +118,7 @@ The reason there are so many missing values for height, is that the Smith Colleg
 
 ## Filtering
 
-One very common thing you will need to do to a dataset is filter for various values.  The `filter()` function in `dplyr` is a great tool to help us do that.
+One very common thing you will need to do to a dataset is filter for various values.  The `filter()` function in `{dplyr}` is a great tool to help us do that.
 
 ```{r filtering, out.width = "100%"}
 knitr::include_graphics("images/dplyr_filter.jpg")
@@ -130,9 +130,9 @@ Artwork by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
 Let's say that we are interested in only looking at data from Smith College (location is "SMC") where students actually measured the height of the trees.  
 
-Let's start with location.  If we remove all the values for the other locations, that will remove lots of rows from the dataset.  To remove rows, we use the `filter()` function from the `dplyr` package.
+Let's start with location.  If we remove all the values for the other locations, that will remove lots of rows from the dataset.  To remove rows, we use the `filter()` function from the `{dplyr}` package.
 
-Open the [help file for the `dplyr` package](https://dplyr.tidyverse.org/reference/filter.html) in a browser tab
+Open the [help file for the `{dplyr}` package](https://dplyr.tidyverse.org/reference/filter.html) in a browser tab
 
 
 Note that the first argument that the `filter()` function expects to see is the data in the form of a data frame.  The hemlocks dataset was already imported as a tibble, which is a special form of a data frame, so we just have to put the tibble object name in that location.
@@ -251,7 +251,7 @@ If you did the filtering correctly, you should have only SMC values present for 
 
 ## Sorting Data
 
-We can use another function called `arrange()` in the `dplyr` package to sort the dataset if needed. 
+We can use another function called `arrange()` in the `{dplyr}` package to sort the dataset if needed. 
 
 
 ```{r sort, exercise=TRUE, exercise.setup = "hemlocks3"}
@@ -276,7 +276,7 @@ Sorting can sometimes be required for certain analyses but can also be useful fo
 
 ## Selecting Data
 
-In some cases, it might also be necessary to remove columns from your data.  We can use the `select()` function in `dplyr` to select just the columns we want.  It works similarly to `filter()`, but in this case we are working on columns rather than rows.
+In some cases, it might also be necessary to remove columns from your data.  We can use the `select()` function in `{dplyr}` to select just the columns we want.  It works similarly to `filter()`, but in this case we are working on columns rather than rows.
 
 Let's select just three of the variables from the hemlocks3 dataset 
 
@@ -291,7 +291,7 @@ You can see that we now have only 3 columns (just the 3 we selected in the code 
 ## Calculations with Columns
 
 
-We can also use `dplyr` to do calculations on a column using the `mutate()` function.
+We can also use `{dplyr}` to do calculations on a column using the `mutate()` function.
 
 Let's say we want the radius of the trees rather than the diameter.  We can use `mutate()` to just divide the diameter column in half. 
 
@@ -304,7 +304,7 @@ mutate(hemlocks3, radius = diameter/2)
 
 You should now see a new column added to the dataset called radius with values that are half the diameter values
 
-`dplyr` has lots of other useful functions. We will explore a few more in the "Descriptive Statistics" tutorial. 
+`{dplyr}` has lots of other useful functions. We will explore a few more in the "Descriptive Statistics" tutorial. 
 
 
 ## Changing Data Types
@@ -328,7 +328,7 @@ Notice that the location column now has character as the data type.
 
 ## Rename
 
-Sometimes we need to rename a column in our data frame.  This often comes up when trying to merge two datasets when they have slightly different names (Date vs date can even cause problems).  or maybe we just get tired of typing long variable names.  To changet the name of a column, we can just use the `rename()` function in `dplyr` with the general form:
+Sometimes we need to rename a column in our data frame.  This often comes up when trying to merge two datasets when they have slightly different names (Date vs date can even cause problems).  or maybe we just get tired of typing long variable names.  To changet the name of a column, we can just use the `rename()` function in `{dplyr}` with the general form:
 
 `rename(mydata, new_name = old_name)`
 
@@ -345,7 +345,7 @@ rename(hemlocks, size = size.group)
 
 Now that we are seeing more and more useful functions to help us manipulate our data, it may be clear that we might want to string together a bunch of different functions on the same set of data.
 
-A really handy thing we can use to chain together a bunch of different lines of code is the pipe operator `%>%`.  The pipe operator is actually from a package called `magrittr`, but this gets installed automatically when you install `dplyr` so you don't have to load it yourself.
+A really handy thing we can use to chain together a bunch of different lines of code is the pipe operator `%>%`.  The pipe operator is actually from a package called `{magrittr}`, but this gets installed automatically when you install `{dplyr}` so you don't have to load it yourself.
 
 Think of the pipe operator as being the same as "and then".  Basically, you take the output of one set of code and then "pipe" the result into the next line of code.  It allows you to chain a bunch of code together.
 
@@ -365,7 +365,7 @@ Basically, the code we wrote says "Make a new object called hemlocks2 by first t
 Try using what we have learned in this tutorial to write your own code.  
 
 Take the original dataset `hemlocks` and call the new object `hemlocks4`.  
-Use the pipe operator to link together two functions from `dplyr` so that the `hemlocks4` data frame gives data for just the "Sapling" trees and arrange by diameter in descending order.  Use the skeleton of the code given below and just fill in the blanks.
+Use the pipe operator to link together two functions from `{dplyr}` so that the `hemlocks4` data frame gives data for just the "Sapling" trees and arrange by diameter in descending order.  Use the skeleton of the code given below and just fill in the blanks.
 
 
 ```{r example, exercise=TRUE}
@@ -477,10 +477,10 @@ Artwork by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
  
 ## Resources
 
-* [Wrangling penguins: some basic data wrangling in R with dplyr](https://allisonhorst.shinyapps.io/dplyr-learnr/#section-welcome): a longer learnr tutorial with more functions from `dplyr`, lots of examples, and more practice
-* [Data Transformation with dplyr Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf): overview of how to use `dplyr`
+* [Wrangling penguins: some basic data wrangling in R with dplyr](https://allisonhorst.shinyapps.io/dplyr-learnr/#section-welcome): a longer learnr tutorial with more functions from `{dplyr}`, lots of examples, and more practice
+* [Data Transformation with dplyr Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf): overview of how to use `{dplyr}`
 * [Chapter 3 - Data Wrangling](https://moderndive.com/3-wrangling.html): ModernDive chapter on “wrangling” data into the form you need
-* [Chapter 5 - Data transformations](https://r4ds.had.co.nz/transform.html#introduction-2): chapter in R for Data Science on how to manipulate data frames with `dplyr`
+* [Chapter 5 - Data transformations](https://r4ds.had.co.nz/transform.html#introduction-2): chapter in R for Data Science on how to manipulate data frames with `{dplyr}`
 * [dplyr](https://dplyr.tidyverse.org/): a package that provides “a consistent set of verbs that help you solve the most common data * manipulation challenges”
 * [How to Filter in R: A Detailed Introduction to the dplyr Filter Function](https://www.r-bloggers.com/2019/04/how-to-filter-in-r-a-detailed-introduction-to-the-dplyr-filter-function/)
 * [Comparisons](https://r4ds.had.co.nz/transform.html#comparisons): what symbols give you the comparison operators (equals, not equals, greater than, less than, etc) when using functions such as `filter()`
