@@ -11,7 +11,7 @@ description: >
  Learn how to make graphs with `ggplot()` from the `{ggplot2}` package
 ---
 
-```{r setup, include=FALSE, exercise = TRUE}
+```{r setup, include=FALSE}
 # packages
 library(learnr)
 library(gradethis)
@@ -39,7 +39,9 @@ In this lesson, we will learn how to make several types of graphs using the `ggp
 
 To complete this tutorial successfully, you will need to understand variable types (continuous, categorical, dependent, independent, etc), what a histogram, boxplot, and scatterplot are, and be able to build on the tutorials that came before this one in the **Intro to R for Biology** course.  Use the resources given for this lesson to help you with basic terminology and understanding the different graph types if you haven't learned it before or need a refresher.
 
-As a reminder, the hemlock data were collected by Smith College Bio 131 students. They measured the diameter and height for eastern hemlock trees at 4 locations in Western Massachusetts. You can get more information by searching for `hemlocks` in the help tab in RStudio or typing `?hemlocks` in the RStudio Console.
+As a reminder, the hemlock data were collected by Smith College Bio 131 students. They measured the diameter and height for eastern hemlock trees at 4 locations in Western Massachusetts. See this link for more information about the data (=metadata): [hemlocks](https://docs.google.com/document/d/1fZHsb6my8DkOV8iTq0Rmr_5acViu8hnBOU5Wxyxt74Q/edit#bookmark=id.l0w21zezf2qy)
+
+If working on a local desktop version where you have installed the `{r4bio}` package, you can get more information by searching for `hemlocks` in the help tab in RStudio or typing `?hemlocks` in the RStudio Console.
 
 ### Learning goals
 

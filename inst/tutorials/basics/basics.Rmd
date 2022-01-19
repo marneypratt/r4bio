@@ -11,7 +11,7 @@ description: >
  Learn some basics of how to use R including installing and loading packages, what functions are, and how to use help pages
 ---
 
-```{r setup, include=FALSE, exercise = TRUE}
+```{r setup, include=FALSE}
 # packages
 library(learnr)
 library(gradethis)
@@ -132,7 +132,7 @@ You might notice that there are a lot different words followed by parentheses.  
 
 If we want to be really clear what package a function comes from, we use a double colon between the package and function name `package::function()` so in this example it would be `ggplot2::ggplot()`
 
-We will come back to learning more about how to make graphs with `ggplot2` in later tutorials.  Let's learn more about some of the basic tools you will need to be able to make your own beautiful and informative graphs.
+We will come back to learning more about how to make graphs with `{ggplot2}` in later tutorials.  Let's learn more about some of the basic tools you will need to be able to make your own beautiful and informative graphs.
 
 
 ## Functions
