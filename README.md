@@ -2,7 +2,7 @@
 
 ### by Marney Pratt
 
-### Last updated on June 22, 2021
+### Last updated on January 19, 2022
 
 ## Why use learnr to learn R?
 
