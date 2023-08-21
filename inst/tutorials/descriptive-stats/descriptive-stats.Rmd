@@ -39,17 +39,25 @@ In this lesson, we will learn some basic ways to summarize data with descriptive
 
 We will also briefly cover some basic statistical concepts, but if you have never learned about descriptive statistics or need a refresher, please see the resources for this lesson for more detailed information.
 
-This tutorial assumes you understand how to use the pipe operator `%>%` and some other basic R skills. See the other **Intro to R for BIology** tutorials for review.
-
-Like many of the tutorials in **Intro to R for Biology**, we will use the hemlocks dataset from the `{r4bio}` package. 
-
-As a reminder, the hemlock data were collected by Smith College Bio 131 students. They measured the diameter and height for eastern hemlock trees at 4 locations in Western Massachusetts. You can get more information by searching for `hemlocks` in the help tab in RStudio or typing `?hemlocks` in the RStudio Console.
+This tutorial assumes you understand how to use the pipe operator (`|>` or `%>%`) and some other basic R skills. See the other **Intro to R for Biology** tutorials for review.
 
 ### Learning goals
 
 * Learn some basic concepts about descriptive statistics
 * Use the `group_by()` and `summarize()` functions from `{dplyr}` to calculate descriptive statistics
 
+## Hemlocks Data
+
+Like many of the tutorials in **Intro to R for Biology**, we will use the hemlocks dataset from the `{r4bio}` package. 
+
+As a reminder, the hemlock data were collected by Smith College Bio 131 students. They measured the diameter and height for eastern hemlock trees at 4 locations in Western Massachusetts. After loading the `r4bio` package, you can get more information about the dataset by searching for `hemlocks` in the help tab in RStudio or typing `?hemlocks` in the RStudio Console or an R code chunk.
+
+```{r hemlockshelp, exercise=TRUE}
+
+library(r4bio) #load the r4bio package
+?hemlocks      #open the help file for the data
+
+```
 
 ## Measure of Central Tendency
 
@@ -100,6 +108,9 @@ knitr::include_graphics("images/not_normal.png")
 
 Artwork by [Allison Horst](https://github.com/allisonhorst/stats-illustrations) 
 
+
+Below is the summary for just the diameter variable for the hemlocks data
+
 ```{r summary2, echo=FALSE}
 summary(hemlocks$diameter)
 ```
@@ -124,7 +135,8 @@ If the mean and the median are the same, that is one piece of evidence that the 
 
 Another piece of evidence we can use to decide if the data are normal or not is to use some form of visualization.  A common way to visualize distributions is a histogram.  
 
-See this link [Histograms](https://moderndive.com/2-viz.html#histograms) to learn more about historgrams.
+See this link to learn more about [Histograms](https://moderndive.com/2-viz.html#histograms)
+(NOTE: use CMD+click on a Mac or CTRL+click on a Windows computer to open the link in a different tab so you can also keep this tutorial open at the same time)
 
 Run the code below to see a histogram of the diameter of the hemlocks
 
@@ -170,10 +182,10 @@ There are several possible measures of dispersion you could use to describe the 
 
 Let's use the `summarize()` function from the `{dplyr}` package to calculate some descriptive statistics for the diameter of all the hemlock trees.  (note that you can spell the function `summarize()` or `summarise()` but we will use `summarize()` in this tutorial)
 
-The general form for the `summarize()` function using the pipe operator is
+The general form for the `summarize()` function using the native R pipe operator is
 
 ```
-mydata %>%
+mydata |>
     summarize(label_name = function(column_name))
 ```
 
@@ -188,7 +200,7 @@ Don't forget, we need to load the `{dplyr}` package before we can use any functi
 ```{r sum1, exercise=TRUE}
 library(dplyr)
 
-hemlocks %>%     #take the hemlocks data frame and then
+hemlocks |>      #take the hemlocks data frame and then
   summarize(     #summarize the following
             Mean = mean(diameter),     #calculate the mean diameter and call it Mean
             SD = sd(diameter),         #calculate the standard deviation of the diameter and call it SD
@@ -227,7 +239,7 @@ Let's try doing the same thing with a different variable - height
 
 ```{r sum2, exercise=TRUE}
 
-hemlocks %>% 
+hemlocks |> 
   summarize(Mean = mean(height),
             SD = sd(height),
             Median = median(height), 
@@ -251,7 +263,7 @@ We have a few options to deal with this.  We can filter out the missing values f
 
 ```{r missing, exercise=TRUE}
 
-hemlocks %>% 
+hemlocks |> 
   summarize(Mean = mean(height, na.rm=TRUE),
             SD = sd(height, na.rm=TRUE),
             Median = median(height, na.rm=TRUE), 
@@ -275,7 +287,8 @@ Let's make a histogram for the height variable
 ```{r hist_height, exercise=TRUE}
 
 #remove missing values
-hemlocks.h <- hemlocks %>% filter(!is.na(height))
+hemlocks.h <- hemlocks |> 
+  filter(!is.na(height))
 
 #graph histogram
 ggplot(data = hemlocks.h, aes(x = height))+ 
@@ -318,8 +331,8 @@ In this case, we are going to use the `size.group` variable which contains the t
 
 ```{r sum3, exercise=TRUE, message=FALSE}
 
-hemlocks %>% 
-  group_by(size.group) %>% 
+hemlocks |> 
+  group_by(size.group) |> 
   summarize(Mean = mean(diameter),
             SD = sd(diameter),
             Median = median(diameter), 
