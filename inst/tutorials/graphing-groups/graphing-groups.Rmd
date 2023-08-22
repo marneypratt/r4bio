@@ -46,14 +46,6 @@ While not necessary to complete this tutorial, you should know how to do the fol
 
 If you are unfamiliar with any of these basic statistical terms and concepts, then complete the other Tutorials in the **Into to R for Biology** course and use the resources in the tutorials to go deeper.
 
-For this tutorial, we will use data on the density of an invasive insect pest on Eastern hemlock trees.  
-
-The data were collected by Smith College students from the Research in Biodiversity, Ecology, and Conservation (Bio 131) course beginning in March of 2015. The dataset includes data from several semesters, and four different locations in Western Massachusetts. 
-
-See this link for more information about the data (=metadata): [hemlockpests](https://docs.google.com/document/d/1fZHsb6my8DkOV8iTq0Rmr_5acViu8hnBOU5Wxyxt74Q/edit#bookmark=id.vst3veyyl3ty)
-
-If working on a local desktop version where you have installed the `{r4bio}` package, you can get more information by searching for `hemlockpests` in the help tab in RStudio or typing `?hemlockpests` in the RStudio Console.
-
 ### Learning goals
 
 * Determine variable types and which axes to put each on
@@ -62,6 +54,20 @@ If working on a local desktop version where you have installed the `{r4bio}` pac
 * Learn the pros and cons of different graphs for grouped continuous data 
 * What to include in a figure legend
 
+## Hemlock Pest Data
+
+For this tutorial, we will use data on the density of an invasive insect pest on Eastern hemlock trees.  
+
+The data were collected by Smith College students from the Research in Biodiversity, Ecology, and Conservation (Bio 131) course beginning in March of 2015. The dataset includes data from several semesters, and four different locations in Western Massachusetts. 
+
+After loading the `r4bio` package, you can get more information about the dataset by searching for `hemlockpests` in the help tab in RStudio or typing `?hemlockpests` in the RStudio Console or an R code chunk.
+
+```{r hemlockshelp, exercise=TRUE}
+
+library(r4bio) #load the r4bio package
+?hemlockpests      #open the help file for the data
+
+```
 
 ## Variable Types
 
@@ -112,16 +118,16 @@ Now you know we have a continuous dependent variable (EHS density) and a categor
 
 The name of the dataset we are going to be using is `hemlockpests`, the dependent variable is `EHS`, and the independent variable is `Location`
 
-Before we make this bar graph, we first have to do some calculations including the calculate the mean, standard deviation, count number of cases, and then calculate the standard error of the mean (which is inferential and not descriptive). This was done for you and will show below.
+Before we make this bar graph, we first have to do some calculations including the mean, standard deviation, count number of cases, and then calculate the standard error of the mean (which is inferential and not descriptive). This was done for you and will show below.
 
 ```{r bar, exercise=TRUE}
 
 #first calculate the mean, sd, & count the observations in each group
-EHS.sum <- hemlockpests %>%
-  group_by(Location) %>%
+EHS.sum <- hemlockpests |>
+  group_by(Location) |>
   summarise(mean = mean(EHS), 
             sd = sd(EHS), 
-            n = n()) %>%
+            n = n()) |>
   
   #calculate the standard error
   mutate(sem = sd/(sqrt(n)))
@@ -131,7 +137,7 @@ ggplot(
   data=EHS.sum, 
   aes(x=Location,y=mean))+
   geom_bar(stat="identity",  width = 0.5, fill = "steelblue")+
-  geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=0.1, size=1) +
+  geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem), width=0.1, linewidth=1) +
   ylab("EHS Density (insects/cm)") +
   xlab("Location") +
   coord_cartesian(xlim = c(0.5,4.5), ylim = c(0,5), expand=FALSE) +
@@ -189,8 +195,8 @@ Let's look at the sample size of each group
 
 ```{r size, exercise=TRUE}
 
-hemlockpests %>%
-  group_by(Location) %>%
+hemlockpests |>
+  group_by(Location) |>
   summarise(n = n())
 
 ```
@@ -229,8 +235,8 @@ Let's look at a histogram of the FLH location to start with
 
 ```{r hist, exercise=TRUE}
 
-hemlockpests %>% 
-  filter(Location == "FLH") %>% 
+hemlockpests |> 
+  filter(Location == "FLH") |> 
   
   ggplot(aes(x = EHS))+ 
   geom_histogram(binwidth = 0.4, color = "white", fill = "steelblue") +
@@ -416,7 +422,7 @@ Let's look at a simple violin plot
 ggplot(
   data=hemlockpests,
   aes(x=Location, y=EHS, fill=Location)) +
-    geom_violin(width=1.4) +
+    geom_violin(width=1) +
     ylab("EHS Density (insects/cm)") +
     xlab("Location") +
     theme_classic(base_size=18) +
@@ -431,7 +437,7 @@ Sometimes people also like to put a little boxplot inside of the violin plot bec
 ggplot(
   data=hemlockpests,
   aes(x=Location, y=EHS, fill=Location)) +
-    geom_violin(width=1.4) +
+    geom_violin(width=1) +
     geom_boxplot(width=0.1, color="black", alpha=0.8) +
     ylab("EHS Density (insects/cm)") +
     xlab("Location") +
@@ -453,14 +459,14 @@ The code below gets a little fancier, but it is a nice way to add the sample siz
 ```{r violin3, exercise=TRUE, warning=FALSE}
 
 #sample size
-sample_size = hemlockpests %>% 
-  group_by(Location) %>% 
+sample_size = hemlockpests |> 
+  group_by(Location) |> 
   summarize (num=n())
 
 #violin plot with box plots and sample sizes
-hemlockpests %>% 
-  left_join(sample_size, by="Location") %>% 
-  mutate(myaxis = paste0(Location, "\n", "n=", num)) %>% 
+hemlockpests |> 
+  left_join(sample_size, by="Location") |> 
+  mutate(myaxis = paste0(Location, "\n", "n=", num)) |> 
   ggplot(aes(x=myaxis, y=EHS, fill=Location)) +
     geom_violin(width=1.4) +
     geom_boxplot(width=0.1, color="black", alpha=0.8) +
@@ -484,7 +490,7 @@ Below is the code for a dot plot with the mean shown as the thick horizontal bar
 ```{r small, exercise=TRUE}
 
 #Filter for one semester Spring 2019
-small <- hemlockpests %>% 
+small <- hemlockpests |> 
   filter (SamplingDate > as.Date("2018-11-20"))
 
 #Dot plot with median
