@@ -40,7 +40,8 @@ In this lesson, we will learn some basic ways to manipulate a data frame (often 
 
 * Use the `{dplyr}` package to filter, sort, and manipulate data
 * How to find and remove missing data
-* Learn about the pipe operator `%>%` or `|>`
+* Learn about the pipe operator `|>` or `%>%`
+
 
 ```{r dplyr, out.width = "20%"}
 knitr::include_graphics("images/dplyr_hex.png")
