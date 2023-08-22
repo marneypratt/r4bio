@@ -2,7 +2,7 @@
 #' @description Eastern hemlock (*Tsuga canadensis*) trees were selected on the dates indicated in different locations in Western Massachusetts, USA.    
 #' 
 #' For each tree, a selection of reachable branches were inspected in the field for invasive insects, and 1-3 branches were clipped from the tree to later assess with a microscope in lab whether is was infested with invasive insects or not. 
-#' The method for branch collection varried with year:
+#' The method for branch collection varied with year:
 #' \itemize{
 #'  \item In 2015 2 branches were clipped from opposite sides per tree, and then 3 branchlets were chosen randomly per branch to assess infestation in lab
 #'  \item In 2016 3 branches were clipped per tree, 1 branchlet chosen randomly per branch
