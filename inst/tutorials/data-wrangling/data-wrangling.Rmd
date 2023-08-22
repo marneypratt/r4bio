@@ -40,7 +40,7 @@ In this lesson, we will learn some basic ways to manipulate a data frame (often 
 
 * Use the `{dplyr}` package to filter, sort, and manipulate data
 * How to find and remove missing data
-* Learn about the pipe operator ` %>% `
+* Learn about the pipe operator `%>%` or `|>`
 
 ```{r dplyr, out.width = "20%"}
 knitr::include_graphics("images/dplyr_hex.png")
@@ -59,10 +59,11 @@ library(r4bio) #for loading the hemlocks dataset
 
 ```
 
+Remember, all we have done here is load these two packages so you won't see any output.
 
-Not that there are # signs in the code above.  Any text you put after a # sign will be ignored by R.  This allows us to comment on our code so we can remember what we did and why later.  It is good practice to comment a lot for your future self and for others to be able to understand your code.
+Also, please note that there are # signs in the code above.  Any text you put after a # sign will be ignored by R.  This allows us to comment on our code so we can remember what we did and why later.  It is good practice to comment a lot for your future self and for others to be able to understand your code.
 
-In the last "Getting Data into R" tutorial, we used several functions from base R to look at the structure of data.  Let's try the `glimpse()` function from the `{dplyr}` package to look at the structure of the `hemlocks` dataset. 
+In the last tutorial ("Getting Data into R"), we used several functions from base R to look at the structure of data.  Let's try the `glimpse()` function from the `{dplyr}` package to look at the structure of the `hemlocks` dataset. 
 
 
 ```{r glimpse, exercise=TRUE, message=FALSE}
@@ -71,7 +72,7 @@ glimpse(hemlocks)
 
 ```
 
-Notice that this data frame has several variables that are factors, a date variable, and a few numeric variables (shown as <dbl> which stands for double-precision floating point number which uses more memory to represent a value - basically just think of it as the same thing as numeric) 
+Notice that this data frame has several variables that are factors (`<fct>`), a date variable (`<date>`), and a few numeric variables (shown as `<dbl>` which stands for double-precision floating point number which uses more memory to represent a value - basically just think of it as the same thing as numeric) 
 
 
 ```{r tree_num}
@@ -79,7 +80,7 @@ Notice that this data frame has several variables that are factors, a date varia
 question_text("How many trees were measured in this data frame? (note that each row represents the data from an individual tree)",
               answer("298", correct=TRUE),
               answer("7", message="Nope, not the columns. How many rows does the datset have?"),
-              incorrect = "Run `glimpse(hemlocks)` from the code chunk above to see the structure of the hemlocks dataset and type in the number given for rows.",
+              try_again = "Run `glimpse(hemlocks)` from the code chunk above to see the structure of the hemlocks dataset and type in the number given for rows.",
               allow_retry = TRUE,
               trim=TRUE
               )
@@ -89,7 +90,7 @@ question_text("How many trees were measured in this data frame? (note that each 
 
 ## Summary()
 
-In addition to using the `glimpse()` function, we can use the `summary()` function from base R which will give the minimum, 1st quartile, median, mean, 3rd quartile, maximum, and number of missing values (NA's) for each numeric variable (numeric columns), and the number of each category for each categorical variable (factor columns).  Run the code below and then look at the output.
+In addition to using the `glimpse()` function, we can use the `summary()` function from base R which will give the minimum, 1st quartile, median, mean, 3rd quartile, maximum, and number of missing values (NA's) for each numeric variable (numeric columns) as well as dates, and the number of each category for each categorical variable (factor columns).  Run the code below and then look at the output.
 
 ```{r summary_h, exercise=TRUE, message=FALSE}
 
@@ -114,7 +115,7 @@ quiz(
 
 ```
 
-The reason there are so many missing values for height, is that the Smith College Bio 131 students have been measuring the diameter of the hemlock trees in all the years of data collection, but they only measured the height in some years.
+The reason there are so many missing values for height, is that the Smith College Bio 131 students have been measuring the diameter of the hemlock trees in all the years of data collection, but they only measured the height in some of the years.
 
 ## Filtering
 
@@ -128,16 +129,16 @@ Artwork by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
 ##
 
-Let's say that we are interested in only looking at data from Smith College (location is "SMC") where students actually measured the height of the trees.  
+Let's say that we are interested in only looking at data from Smith College ("SMC" values within the location variable) where students actually measured the height of the trees.  
 
-Let's start with location.  If we remove all the values for the other locations, that will remove lots of rows from the dataset.  To remove rows, we use the `filter()` function from the `{dplyr}` package.
+Let's start with location.  If we remove all the values for the other locations, that will remove lots of rows from the dataset.  To keep versus remove rows, we use the `filter()` function from the `{dplyr}` package.
 
-Open the [help file for the `{dplyr}` package](https://dplyr.tidyverse.org/reference/filter.html) in a browser tab
+Open the [help file for the `{dplyr}` package](https://dplyr.tidyverse.org/reference/filter.html) in a browser tab (NOTE: use CMD+click on a Mac or CTRL+click on a Windows computer to open the link in a different tab so you can also keep this tutorial open at the same time)
 
 
 Note that the first argument that the `filter()` function expects to see is the data in the form of a data frame.  The hemlocks dataset was already imported as a tibble, which is a special form of a data frame, so we just have to put the tibble object name in that location.
 
-The next argument (...) is the part where we tell it which things we want to keep using comparison (equals, greater than, less than, etc) and logical (and, or, not) operators.  The last argument (.preserve) we will not be using here.
+The next argument (...) is the part where we tell it which things we want to keep using comparison (equals, greater than, less than, etc) and logical (and, or, not) operators.  The last two arguments (.by and .preserve) we will not be using here.
 
 It is important to note that when you want the equal symbol in the filter() function, you have to use two equals signs together (==).  See the [Comparisons section in R for Data Science](https://r4ds.had.co.nz/transform.html#comparisons) for a detailed discussion of using comparison operators in the `filter()` function.
 
@@ -328,7 +329,7 @@ Notice that the location column now has character as the data type.
 
 ## Rename
 
-Sometimes we need to rename a column in our data frame.  This often comes up when trying to merge two datasets when they have slightly different names (Date vs date can even cause problems).  or maybe we just get tired of typing long variable names.  To changet the name of a column, we can just use the `rename()` function in `{dplyr}` with the general form:
+Sometimes we need to rename a column in our data frame.  This often comes up when trying to merge two datasets when they have slightly different names (Date vs date can even cause problems).  or maybe we just get tired of typing long variable names.  To change the name of a column, we can just use the `rename()` function in `{dplyr}` with the general form:
 
 `rename(mydata, new_name = old_name)`
 
@@ -345,7 +346,9 @@ rename(hemlocks, size = size.group)
 
 Now that we are seeing more and more useful functions to help us manipulate our data, it may be clear that we might want to string together a bunch of different functions on the same set of data.
 
-A really handy thing we can use to chain together a bunch of different lines of code is the pipe operator `%>%`.  The pipe operator is actually from a package called `{magrittr}`, but this gets installed automatically when you install `{dplyr}` so you don't have to load it yourself.
+A really handy thing we can use to chain together a bunch of different lines of code is the pipe operator `|>` or `%>%`.  The first version of the pipe operator, `|>`, is also called the native R pipe operator and has only existed since R version 4.1.0. You don't need any packages installed to use the native R pipe operator. The second version of the pipe operator, `%>%`, is actually from a package called `{magrittr}`, but this gets installed automatically when you install `{dplyr}` so you don't have to load it yourself. Either of these pipe operators will work in most cases, but there are some differences between them. 
+
+If you are interested in how these two pipe operators differ, see the [Differences between the base R and magrittr pipes](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/)
 
 Think of the pipe operator as being the same as "and then".  Basically, you take the output of one set of code and then "pipe" the result into the next line of code.  It allows you to chain a bunch of code together.
 
@@ -354,7 +357,8 @@ Let's say you want to take the original hemlocks dataset and filter for trees fr
 ```{r pipes, out.width = "70%"}
 knitr::include_graphics("images/nativePipe.png")
 ```
-What's great about the pipe operator is that you can reduce the amount of typing. Notice that we only typed the data object name first and then did not have to type it again in each function.  
+
+What's great about the pipe operators is that you can reduce the amount of typing. Notice that we only typed the data object name first and then did not have to type it again in each function.  
 
 Basically, the code we wrote says "Make a new object called hemlocks2 by first taking the object called hemlocks and then filter that for the SMC location, and then select the date, diameter, and height columns"
 
@@ -364,13 +368,13 @@ Basically, the code we wrote says "Make a new object called hemlocks2 by first t
 Try using what we have learned in this tutorial to write your own code.  
 
 Take the original dataset `hemlocks` and call the new object `hemlocks4`.  
-Use the pipe operator to link together two functions from `{dplyr}` so that the `hemlocks4` data frame gives data for just the "Sapling" trees and arrange by diameter in descending order.  Use the skeleton of the code given below and just fill in the blanks.
+Use the native R pipe operator to link together two functions from `{dplyr}` so that the `hemlocks4` data frame gives data for just the "Sapling" trees and arrange by diameter in descending order.  Use the skeleton of the code given below and just fill in the blanks.
 
 
 ```{r example, exercise=TRUE}
 
-___ <- ___ %>% 
-  ___(size.group == "___") %>% 
+___ <- ___ |> 
+  ___(size.group == "___") |> 
   ___(___(___))
   
 hemlocks4
@@ -380,8 +384,8 @@ hemlocks4
 
 ```{r example-hint-1}
 
-hemlocks4 <- hemlocks %>% 
-  ___(size.group == "___") %>% 
+hemlocks4 <- hemlocks |> 
+  ___(size.group == "___") |> 
   ___(___(___))
 
 hemlocks4
@@ -391,8 +395,8 @@ hemlocks4
 
 ```{r example-hint-2}
 
-hemlocks4 <- hemlocks %>% 
-  filter(size.group == "___") %>% 
+hemlocks4 <- hemlocks |> 
+  filter(size.group == "___") |> 
   ___(___(___))
 
 hemlocks4
@@ -402,7 +406,7 @@ hemlocks4
 ```{r example-hint-3}
 
 hemlocks4 <- hemlocks %>% 
-  filter(size.group == "Sapling") %>% 
+  filter(size.group == "Sapling") |> 
   ___(___(___))
 
 hemlocks4
@@ -411,8 +415,8 @@ hemlocks4
 
 ```{r example-hint-4}
 
-hemlocks4 <- hemlocks %>% 
-  filter(size.group == "Sapling") %>% 
+hemlocks4 <- hemlocks |> 
+  filter(size.group == "Sapling") |> 
   arrange(___(___))
 
 hemlocks4
@@ -422,8 +426,8 @@ hemlocks4
 
 ```{r example-hint-5}
 
-hemlocks4 <- hemlocks %>% 
-  filter(size.group == "Sapling") %>% 
+hemlocks4 <- hemlocks |> 
+  filter(size.group == "Sapling") |> 
   arrange(desc(___))
 
 hemlocks4
@@ -432,13 +436,14 @@ hemlocks4
 
 ```{r example-solution}
 
-hemlocks4 <- hemlocks %>% 
-  filter(size.group == "Sapling") %>% 
+hemlocks4 <- hemlocks |> 
+  filter(size.group == "Sapling") |> 
   arrange(desc(diameter))
 
 hemlocks4
 
 ```
+
 
 ```{r example-check}
 
