@@ -182,7 +182,7 @@ There are several possible measures of dispersion you could use to describe the 
 
 Let's use the `summarize()` function from the `{dplyr}` package to calculate some descriptive statistics for the diameter of all the hemlock trees.  (note that you can spell the function `summarize()` or `summarise()` but we will use `summarize()` in this tutorial)
 
-The general form for the `summarize()` function using the native R pipe operator is
+The general form for the `summarize()` function using the base R pipe operator is
 
 ```
 mydata |>
