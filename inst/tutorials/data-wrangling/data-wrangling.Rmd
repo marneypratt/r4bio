@@ -40,7 +40,7 @@ In this lesson, we will learn some basic ways to manipulate a data frame (often 
 
 * Use the `{dplyr}` package to filter, sort, and manipulate data
 * How to find and remove missing data
-* Learn about the pipe operator ` %>% `
+* Learn about the pipe operator `|>` or `%>%`
 
 ```{r dplyr, out.width = "20%"}
 knitr::include_graphics("images/dplyr_hex.png")
@@ -59,10 +59,11 @@ library(r4bio) #for loading the hemlocks dataset
 
 ```
 
+Remember, all we have done here is load these two packages so you won't see any output.
 
-Not that there are # signs in the code above.  Any text you put after a # sign will be ignored by R.  This allows us to comment on our code so we can remember what we did and why later.  It is good practice to comment a lot for your future self and for others to be able to understand your code.
+Also, please note that there are # signs in the code above.  Any text you put after a # sign will be ignored by R.  This allows us to comment on our code so we can remember what we did and why later.  It is good practice to comment a lot for your future self and for others to be able to understand your code.
 
-In the last "Getting Data into R" tutorial, we used several functions from base R to look at the structure of data.  Let's try the `glimpse()` function from the `{dplyr}` package to look at the structure of the `hemlocks` dataset. 
+In the last tutorial ("Getting Data into R"), we used several functions from base R to look at the structure of data.  Let's try the `glimpse()` function from the `{dplyr}` package to look at the structure of the `hemlocks` dataset. 
 
 
 ```{r glimpse, exercise=TRUE, message=FALSE}
@@ -71,7 +72,7 @@ glimpse(hemlocks)
 
 ```
 
-Notice that this data frame has several variables that are factors, a date variable, and a few numeric variables (shown as <dbl> which stands for double-precision floating point number which uses more memory to represent a value - basically just think of it as the same thing as numeric) 
+Notice that this data frame has several variables that are factors (`<fct>`), a date variable (`<date>`), and a few numeric variables (shown as `<dbl>` which stands for double-precision floating point number which uses more memory to represent a value - basically just think of it as the same thing as numeric) 
 
 
 ```{r tree_num}
