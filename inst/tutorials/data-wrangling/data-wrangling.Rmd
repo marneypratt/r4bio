@@ -1,7 +1,7 @@
 ---
 title: "Intro to R for Biology: Working with Data"
 tutorial:
-  version: 1.0
+  version: 1.1
 output: 
   learnr::tutorial:
     progressive: true
@@ -349,12 +349,11 @@ A really handy thing we can use to chain together a bunch of different lines of 
 
 Think of the pipe operator as being the same as "and then".  Basically, you take the output of one set of code and then "pipe" the result into the next line of code.  It allows you to chain a bunch of code together.
 
-Let's say you want to take the original hemlocks dataset and filter for trees from the Smith College ("SMC") and then select just the date, diameter, and height variables.  You could use the following code to do this using the pipe operator.
+Let's say you want to take the original hemlocks dataset and filter for trees from the Smith College ("SMC") and then select just the date, diameter, and height variables.  You could use the following code to do this using the native R pipe operator.
 
 ```{r pipes, out.width = "70%"}
-knitr::include_graphics("images/pipes.png")
+knitr::include_graphics("images/nativePipe.png")
 ```
-
 What's great about the pipe operator is that you can reduce the amount of typing. Notice that we only typed the data object name first and then did not have to type it again in each function.  
 
 Basically, the code we wrote says "Make a new object called hemlocks2 by first taking the object called hemlocks and then filter that for the SMC location, and then select the date, diameter, and height columns"
