@@ -347,16 +347,16 @@ rename(hemlocks, size = size.group)
 
 Now that we are seeing more and more useful functions to help us manipulate our data, it may be clear that we might want to string together a bunch of different functions on the same set of data.
 
-A really handy thing we can use to chain together a bunch of different lines of code is the pipe operator `|>` or `%>%`.  The first version of the pipe operator, `|>`, is also called the native R pipe operator and has only existed since R version 4.1.0. You don't need any packages installed to use the native R pipe operator. The second version of the pipe operator, `%>%`, is actually from a package called `{magrittr}`, but this gets installed automatically when you install `{dplyr}` so you don't have to load it yourself. Either of these pipe operators will work in most cases, but there are some differences between them. 
+A really handy thing we can use to chain together a bunch of different lines of code is the pipe operator `|>` or `%>%`.  The first version of the pipe operator, `|>`, is also called the base R pipe operator and has only existed since R version 4.1.0. You don't need any packages installed to use the base R pipe operator. The second version of the pipe operator, `%>%`, is actually from a package called `{magrittr}`, but this gets installed automatically when you install `{dplyr}` so you don't have to load it yourself. Either of these pipe operators will work in most cases, but there are some differences between them. 
 
 If you are interested in how these two pipe operators differ, see the [Differences between the base R and magrittr pipes](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/)
 
 Think of the pipe operator as being the same as "and then".  Basically, you take the output of one set of code and then "pipe" the result into the next line of code.  It allows you to chain a bunch of code together.
 
-Let's say you want to take the original hemlocks dataset and filter for trees from the Smith College ("SMC") and then select just the date, diameter, and height variables.  You could use the following code to do this using the native R pipe operator.
+Let's say you want to take the original hemlocks dataset and filter for trees from the Smith College ("SMC") and then select just the date, diameter, and height variables.  You could use the following code to do this using the base R pipe operator.
 
 ```{r pipes, out.width = "70%"}
-knitr::include_graphics("images/nativePipe.png")
+knitr::include_graphics("images/basePipe.png")
 ```
 
 What's great about the pipe operators is that you can reduce the amount of typing. Notice that we only typed the data object name first and then did not have to type it again in each function.  
@@ -369,7 +369,7 @@ Basically, the code we wrote says "Make a new object called hemlocks2 by first t
 Try using what we have learned in this tutorial to write your own code.  
 
 Take the original dataset `hemlocks` and call the new object `hemlocks4`.  
-Use the native R pipe operator to link together two functions from `{dplyr}` so that the `hemlocks4` data frame gives data for just the "Sapling" trees and arrange by diameter in descending order.  Use the skeleton of the code given below and just fill in the blanks.
+Use the base R pipe operator to link together two functions from `{dplyr}` so that the `hemlocks4` data frame gives data for just the "Sapling" trees and arrange by diameter in descending order.  Use the skeleton of the code given below and just fill in the blanks.
 
 
 ```{r example, exercise=TRUE}
@@ -406,7 +406,7 @@ hemlocks4
 
 ```{r example-hint-3}
 
-hemlocks4 <- hemlocks %>% 
+hemlocks4 <- hemlocks |> 
   filter(size.group == "Sapling") |> 
   ___(___(___))
 
