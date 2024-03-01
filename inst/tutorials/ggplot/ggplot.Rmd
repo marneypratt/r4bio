@@ -348,7 +348,7 @@ Look at the resulting set of histograms.  Note that the distribution is differen
 
 ##
 
-Below is the same code as the previous code. Modify the code so that it is split by the type of infestation (variable = infest) rather than size class. Leave everything else the same
+Below is the same code as the previous code. Modify the code so that it is split by the type of infestation rather than size class (replace **size.group** in the facet_grid function with **infest**). Leave everything else the same
 
 ```{r hist4, exercise=TRUE}
 
@@ -528,7 +528,7 @@ ggplot(
   geom_point(shape=21, size=3, alpha = 0.5,   #adds jittered points
              position=position_jitterdodge(jitter.width=1)) +
   stat_summary(fun = median, fun.min = median, fun.max = median,  #adds median
-               geom = "crossbar", width = 0.5, size = 0.75, colour = "black") +  #sets the look of the median
+               geom = "crossbar", width = 0.5, linewidth = 0.75, colour = "black") +  #sets the look of the median
   ylab("Tree Diameter (cm)") +
   xlab("Infestation") +
   theme_classic(base_size=20) +
